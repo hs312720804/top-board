@@ -99,7 +99,9 @@ export default {
   },
   computed: {},
   created() {
-    this.currentMonth = moment().format('YYYY-MM');  //获取当年月  2022-09
+    this.currentMonth = moment(new Date()).subtract(1,'months').startOf('month').format('YYYY-MM')
+
+    // this.currentMonth = moment().format('YYYY-MM');  //获取当年月  2022-09
     // console.log(' currentMonth-------->', this.currentMonth)
   },
   methods: {

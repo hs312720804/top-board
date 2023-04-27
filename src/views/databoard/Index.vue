@@ -36,7 +36,7 @@
   <div class="swiper-container">
     <div class="swiper-wrapper">
       <div class="swiper-slide" v-for="(val,index) in componentList" :key="index">
-        <component :is="val" :pWidth='pWidth'></component>
+        <component :is="val"></component>
       </div>
     </div>
   </div>
@@ -90,7 +90,7 @@ export default {
         loop: true,
         initialSlide: 0, //设定初始化时slide的索引
         autoplay: {
-          delay: 10000, // 1秒切换一次
+          delay: 1000000, // 1秒切换一次
           disableOnInteraction: false
         },
         updateOnImagesReady: true,

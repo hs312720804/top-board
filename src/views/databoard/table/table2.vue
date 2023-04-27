@@ -44,14 +44,16 @@
       
       <div
         class="table"
+        style="padding: 0px 20px"
       >
-        <c-chart
+        <!-- <c-chart
           style="height: 400px"
           type="bar"
           id="chart-id0"
           :option="optionsData"
           theme="black"
-        ></c-chart>
+        ></c-chart> -->
+        <barChart></barChart>
       </div>
     </div>
     <div class="flex-gap-div"></div>
@@ -82,14 +84,15 @@
 <script>
 import Table4 from './table4.vue'
 import Table3 from './table3.vue'
-import CChart from '@/components/charts/Index.vue'
+import barChart from './barChart.vue'
+// import CChart from '@/components/charts/Index.vue'
 import moment from 'moment'
 
  export default {
    components: {
     Table4,
     Table3,
-    CChart
+    barChart
   },
    data () {
      return {

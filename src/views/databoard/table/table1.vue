@@ -39,9 +39,9 @@
     <div class="flex-gap-div"></div>
     <div class="table-wrap"> 
       <div class="title">
-        荣誉榜
+        黑榜
         <div class="position-right">
-          已解决：6801
+          待解决：6801
         </div>
       </div>
   
