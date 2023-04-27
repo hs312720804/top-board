@@ -90,7 +90,7 @@ export default {
         loop: true,
         initialSlide: 0, //设定初始化时slide的索引
         autoplay: {
-          delay: 2000, // 1秒切换一次
+          delay: 10000, // 1秒切换一次
           disableOnInteraction: false
         },
         updateOnImagesReady: true,

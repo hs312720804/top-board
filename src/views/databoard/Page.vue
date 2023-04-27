@@ -1,10 +1,8 @@
 <template>
-  
-   
   <div style="position: relative">
     <div class="guides-header">
       <div class="site-name">
-        客诉数据总览
+        Top 问题榜
         <span class="sub-title">
           数据统计：{{ currentMonth }}
         </span>
