@@ -236,7 +236,7 @@ export default {
   computed: {},
   created() {
     this.currentMonth = moment().format('YYYY-MM');  //获取当年月  2022-09
-    console.log(' currentMonth-------->', this.currentMonth)
+    // console.log(' currentMonth-------->', this.currentMonth)
   },
   methods: {
     

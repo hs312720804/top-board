@@ -151,7 +151,6 @@ import moment from 'moment'
     this.lastMonth = moment(new Date()).subtract(1,'months').startOf('month').format('M')
     this.beforeLastMonth  = moment(new Date()).subtract(2,'months').startOf('month').format('M')
 
-    console.log('lastMonth--->', this.lastMonth)
 
    },
    methods: {

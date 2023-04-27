@@ -1,6 +1,5 @@
 const { defineConfig } = require('@vue/cli-service')
 // const path = require('path')
-const ModuleFederationPlugin = require("webpack").container.ModuleFederationPlugin
 // const { dependencies: Dep } = require('./package.json')
 
 const ENV = process.env.NODE_ENV
@@ -12,10 +11,10 @@ const BACKEND = process.env.BACKEND || '172.20.151.12:9080' // 开发环境
 
 const PORT = process.env.PORT || '8989'
 const HOST = process.env.HOST || '127.0.0.1'
-const baseUrl = ENV === 'production' ? '/databoard/' : '/'
+const baseUrl = ENV === 'production' ? '/topBoard/' : '/'
 
 module.exports = defineConfig({
-  productionSourceMap: !isPro,
+  // productionSourceMap: !isPro,
   // transpileDependencies: true,
   transpileDependencies: [
     '@ccprivate/utils',
@@ -38,13 +37,6 @@ module.exports = defineConfig({
     historyApiFallback: true
   },
 
-  chainWebpack: config => {
-    config.plugin('html').tap(args => {
-      args[0].title = '酷开云平台数据看板'
-      return args
-    })
-  },
-
   configureWebpack: {
     optimization: {
       splitChunks: {
@@ -52,9 +44,6 @@ module.exports = defineConfig({
         minSize: 100000 // 打包出来的新的chunk最小的文件大小,单位 B，优先级大于maxSize
       }
     },
-    plugins: [
-      new ModuleFederationPlugin({
-      })
-    ]
+    
   }
 })

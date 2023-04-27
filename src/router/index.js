@@ -15,7 +15,7 @@ const routes = [
 ]
 
 const router = new VueRouter({
-  base: '/databoard/',
+  base: '/topBoard/',
   routes,
   mode: 'history'
 })

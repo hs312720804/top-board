@@ -1,7 +1,4 @@
 <template>
-  <!-- <div> -->
-    <!-- <div style="color: #fff;" @click="show = !show">切换</div> -->
-
 <el-scrollbar
   class="pages"
   ref="pages"
@@ -93,7 +90,7 @@ export default {
         loop: true,
         initialSlide: 0, //设定初始化时slide的索引
         autoplay: {
-          delay: 200000, // 1秒切换一次
+          delay: 2000, // 1秒切换一次
           disableOnInteraction: false
         },
         updateOnImagesReady: true,
