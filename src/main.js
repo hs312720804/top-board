@@ -9,6 +9,7 @@ import lodash from 'lodash'
 import './services'
 import cUtils from '@ccprivate/utils/dist/ccUtil.cjs'
 import '@/static/font.styl'
+import "swiper/css/swiper.css"
 
 Vue.prototype.$cUtils = cUtils
 Vue.prototype.$echarts = echarts

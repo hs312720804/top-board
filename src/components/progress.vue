@@ -4,11 +4,12 @@
 
     <div 
       class="progress-bar__inner" :style="{width: value + '%'}">
-      <div 
-        class="progress-bar__innerText" 
-      >
-        {{ value }}
-      </div>
+    </div>
+    <div 
+      class="progress-bar__innerText" 
+      :style="{left: value + '%'}"
+    >
+      {{ value }}
     </div>
   </div>
 </div>
@@ -50,7 +51,6 @@ import { number } from 'echarts';
 }
 .progress-bar__outer {
   height: 23px;
-  overflow: hidden;
   position: relative;
   vertical-align: middle;
   background-color: #4393ff33

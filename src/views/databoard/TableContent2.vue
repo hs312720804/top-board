@@ -5,14 +5,14 @@
       class="table"
     >
       <div class="table-head">
-        <div class="head-item-first">Top10问题</div>
-        <div class="head-item">问题</div>
+        <div class="head-item-first">TOP排名</div>
+        <div class="head-item">问题类型</div>
         <div class="head-item-num">责任人</div>
-        <div class="head-item-num">当月排名</div>
         <div class="head-item-num">昨日客诉量</div>
-        <div class="head-item-num">本月客诉量</div>
-        <div class="head-item-num">上月客诉量</div>
-        <div class="head-item-num">半年客诉均值</div>
+        <div class="head-item-num">{{ lastMonth }}月客诉量</div>
+        <div class="head-item-num">{{beforeLastMonth}}月客诉量</div>
+        <div class="head-item-num">半年客诉量均值</div>
+        <div class="head-item-num">上月排名</div>
       </div>
       <div
         class="table-body--item"
@@ -83,6 +83,8 @@
 import Table4 from './table/table4.vue'
 import Table3 from './table/table3.vue'
 import CChart from '@/components/charts/Index.vue'
+import moment from 'moment'
+
  export default {
    components: {
     Table4,
@@ -91,6 +93,8 @@ import CChart from '@/components/charts/Index.vue'
   },
    data () {
      return {
+      lastMonth: '',
+      beforeLastMonth: '',
       tableData: [{
         date: '2016-05-02',
         name: '王小虎',
@@ -144,6 +148,10 @@ import CChart from '@/components/charts/Index.vue'
      }
    },
    created() {
+    this.lastMonth = moment(new Date()).subtract(1,'months').startOf('month').format('M')
+    this.beforeLastMonth  = moment(new Date()).subtract(2,'months').startOf('month').format('M')
+
+    console.log('lastMonth--->', this.lastMonth)
 
    },
    methods: {

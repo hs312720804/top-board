@@ -28,7 +28,7 @@
         </div>
         <div class="body-item">{{table.departmentName}}</div>
         <div class="body-item-num">
-          <img :src="table.thumbnail" min-width="30" height="30"/>
+          <img :src="table.thumbnail" class="img-style" min-width="30" height="30"/>
         </div>
         <div class="body-item-num">{{table.contribute}}个</div>
         <div class="body-item-num">{{table.activityServiceNumber}}个</div>
@@ -64,7 +64,7 @@
         </div>
         <div class="body-item">{{table.departmentName}}</div>
         <div class="body-item-num">
-          <img :src="table.thumbnail" min-width="30" height="30"/>
+          <img :src="table.thumbnail" class="img-style" min-width="30" height="30" />
         </div>
         <div class="body-item-num">{{table.contribute}}个</div>
         <div class="body-item-num">{{table.activityServiceNumber}}个</div>
