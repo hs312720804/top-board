@@ -62,7 +62,7 @@
 </script>
 
 <style lang='stylus' scoped>
-@import '../table.styl'
+@import './table.styl'
 
 
 .table-head .head-item-num {

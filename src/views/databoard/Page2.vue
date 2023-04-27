@@ -46,7 +46,7 @@
 // import ScreenFull from './Screenfull.vue'
 // import elementResizeDetectorMaker from 'element-resize-detector'
 // import CChart from '@/components/charts/Index.vue'
-import TableContent2 from './TableContent2.vue'
+import TableContent2 from './table/table2.vue'
 import moment from 'moment'
 import setInterval from './setInterval.js'
 export default {

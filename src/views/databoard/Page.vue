@@ -180,7 +180,7 @@
 // import ScreenFull from './Screenfull.vue'
 // import elementResizeDetectorMaker from 'element-resize-detector'
 // import CChart from '@/components/charts/Index.vue'
-import TableContent from './TableContent.vue'
+import TableContent from './table/table1.vue'
 import setInterval from './setInterval.js'
 // import getYMD from '@/utlis/date.js'
 import moment from 'moment'

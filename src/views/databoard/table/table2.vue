@@ -80,8 +80,8 @@
 </template>
 
 <script>
-import Table4 from './table/table4.vue'
-import Table3 from './table/table3.vue'
+import Table4 from './table4.vue'
+import Table3 from './table3.vue'
 import CChart from '@/components/charts/Index.vue'
 import moment from 'moment'
 

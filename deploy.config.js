@@ -3,7 +3,7 @@ module.exports = {
   username: 'deploy',
   password: 'deploy@1234',
   port: 56100, // 端口
-  pathUrl: '/data/www/saas/databoard', // 上传至服务器的目标目录
+  pathUrl: '/data/www/topBoard', // 上传至服务器的目标目录
   dist: 'dist', // 需要部署的打包过后的文件夹 根据项目不同值不同 一般为 dist static 或者build
   isRetainDistFolder: false // 是否保留dist目录
 }
