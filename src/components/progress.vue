@@ -16,13 +16,13 @@
 </template>
 
 <script>
-import { number } from 'echarts';
+// import { number } from 'echarts';
 
  export default {
    components: {},
    props: {
     value: {
-      type: number,
+      type: Number,
       default: 0
     }
    },

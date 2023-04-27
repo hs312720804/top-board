@@ -5,7 +5,7 @@ const { defineConfig } = require('@vue/cli-service')
 const ENV = process.env.NODE_ENV
 const isPro = ENV === 'production'
 // const BACKEND = process.env.BACKEND || '172.20.151.197:9080' // 对接环境
-const BACKEND = process.env.BACKEND || '172.20.151.12:9080' // 开发环境
+const BACKEND = process.env.BACKEND || '172.20.150.233:8088' // 开发环境
 // const BACKEND = process.env.BACKEND || '172.20.151.211:80' // 测试环境
 // const BACKEND = process.env.BACKEND || 'api.cloud.coocaa.com' // 生产环境
 
@@ -17,8 +17,7 @@ module.exports = defineConfig({
   // productionSourceMap: !isPro,
   // transpileDependencies: true,
   transpileDependencies: [
-    '@ccprivate/utils',
-    'echarts'
+    '@ccprivate/utils'
   ],
   publicPath: baseUrl,
   devServer: {

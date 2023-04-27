@@ -68,7 +68,7 @@
         <div class="grid-columns--content">
           <div class="grid-columns--content-box">
             <span class="info" style="margin-left: 0;">BUG</span>
-            <span class="num">172</span>
+            <span class="num">{{ boardBugData.total === undefined ?  '/' : boardBugData.total }}</span>
             <div class="sub-info left-right-layout" >
               <div>
                 同比
@@ -86,21 +86,21 @@
             <div>
               <span class="icon icon1"></span>
               <span class="info">待处理</span>
-              <span class="num">25205</span>
+              <span class="num">{{ boardBugData.waitHandle === undefined ?  '/' : boardBugData.waitHandle }}</span>
             </div>
           </div>
           <div class="grid-columns--content-box" >
             <div>
               <span class="icon icon2"></span>
               <span class="info">处理中</span>
-              <span class="num">777</span>
+              <span class="num">{{ boardBugData.handling === undefined ? '/' : boardBugData.handling }}</span>
             </div>
           </div>
           <div class="grid-columns--content-box" >
             <div>
               <i class="icon el-icon-success"></i>
               <span class="info">已解决</span>
-              <span class="num">25205</span>
+              <span class="num">{{ boardBugData.release === undefined ?  '/' : boardBugData.release }}</span>
             </div>
           </div>
           <div class="grid-columns--content-box" >
@@ -108,7 +108,7 @@
               
               <i class="icon el-icon-star-off"></i>
               <span class="info">满意度</span>
-              <span class="num">/</span>
+              <span class="num">{{ boardBugData.satisfactionRatio === undefined ? '/' : boardBugData.satisfactionRatio }}</span>
             </div>
           </div>
         </div>
@@ -120,7 +120,7 @@
         <div class="grid-columns--content">
           <div class="grid-columns--content-box">
             <span class="info" style="margin-left: 0;">转需求</span>
-            <span class="num">172</span>
+            <span class="num">{{ boardNeedData.total === undefined ? '/' : boardNeedData.total }}</span>
             <div class="sub-info left-right-layout" >
               <div>
                 同比
@@ -138,21 +138,21 @@
             <div>
               <span class="icon icon1"></span>
               <span class="info">待排期</span>
-              <span class="num">25205</span>
+              <span class="num">{{ boardNeedData.waitHandle === undefined ? '/' : boardNeedData.waitHandle}}</span>
             </div>
           </div>
           <div class="grid-columns--content-box" >
             <div>
               <span class="icon icon2"></span>
               <span class="info">进行中</span>
-              <span class="num">777</span>
+              <span class="num">{{ boardNeedData.handling === undefined ? '/' : boardNeedData.handling}}</span>
             </div>
           </div>
           <div class="grid-columns--content-box" >
             <div>
               <i class="icon el-icon-success"></i>
               <span class="info">已发布</span>
-              <span class="num">25205</span>
+              <span class="num">{{ boardNeedData.release === undefined ? '/' : boardNeedData.release}}</span>
             </div>
           </div>
           <div class="grid-columns--content-box" >
@@ -160,7 +160,7 @@
               
               <i class="icon el-icon-star-off"></i>
               <span class="info">满意度</span>
-              <span class="num">80%</span>
+              <span class="num">{{ boardNeedData.satisfactionRatio === undefined ? '/' : boardNeedData.satisfactionRatio}}</span>
             </div>
           </div>
         </div>
@@ -219,6 +219,8 @@ export default {
         value: 'year',
         label: '年度'
       }],
+      boardBugData: {},
+      boardNeedData: {},
       // scalseNum: 1,
       // pagesHeight: 1080,
     }
@@ -229,6 +231,15 @@ export default {
 
     // this.currentMonth = moment().format('YYYY-MM');  //获取当年月  2022-09
     // console.log(' currentMonth-------->', this.currentMonth)
+    const parmas = {
+      date: '2023-03-27 16:19:50'
+    }
+    this.$service.boardBug(parmas).then((res) => {
+      this.boardBugData = res.data || {}
+    })
+    this.$service.boardNeed(parmas).then((res) => {
+      this.boardNeedData = res.data || {}
+    })
   },
   methods: {
     
@@ -240,12 +251,6 @@ export default {
     
   },
   mounted () {
- 
-    // this.$nextTick(() => {
-    //   elementResizeDetectorMaker().listenTo(document.getElementById('111'), (element) => {
-    //     this.resize_window(element.clientWidth)
-    //   })
-    // })
   
   }
 }

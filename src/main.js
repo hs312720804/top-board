@@ -4,7 +4,7 @@ import router from './router'
 import '@/assets/global.styl'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
-import * as echarts from 'echarts'
+// import * as echarts from 'echarts'
 import lodash from 'lodash'
 import './services'
 import cUtils from '@ccprivate/utils/dist/ccUtil.cjs'
@@ -12,7 +12,7 @@ import '@/static/font.styl'
 import "swiper/css/swiper.css"
 
 Vue.prototype.$cUtils = cUtils
-Vue.prototype.$echarts = echarts
+// Vue.prototype.$echarts = echarts
 Vue.prototype.$lodash = lodash
 Vue.config.productionTip = false
 Vue.use(ElementUI)

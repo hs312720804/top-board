@@ -31,7 +31,7 @@
     <div class="databoard-box">
       
       <div class="grid-columns--box">
-        <TableContent2></TableContent2>
+        <TableContent2 :tableData="tableData"></TableContent2>
       </div>
       
     </div>
@@ -87,13 +87,15 @@ export default {
       cycle: [{
         value: 'month',
         label: '月度'
-      },  {
+      }, {
         value: 'quarter',
         label: '季度'
       }, {
         value: 'year',
         label: '年度'
       }],
+      tableData: [],
+      barData: []
       
     }
   },
@@ -103,14 +105,19 @@ export default {
 
     // this.currentMonth = moment().format('YYYY-MM');  //获取当年月  2022-09
     // console.log(' currentMonth-------->', this.currentMonth)
+    const parmas = {
+      timeCode: '2023-04-27'
+    }
+    this.$service.selMonthRanking(parmas).then((res) => {
+      this.tableData = res.data || {}
+    })
+    // this.$service.complaintComparison(parmas).then((res) => {
+    //   this.barData = res.data || {}
+    // })
+    
+  
   },
   methods: {
-    
-    // resize_window (width) {
-    //   const scalseNum = Number((width) / 1920)
-    //   this.scalseNum = scalseNum
-    //   this.pagesHeight = 1080 * scalseNum
-    // }
     
   },
   mounted () {
