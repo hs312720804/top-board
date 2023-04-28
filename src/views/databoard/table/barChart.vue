@@ -262,7 +262,7 @@ a {
   justify-content: space-around;
   flex-direction: row;
   align-items: end;
-  bottom: 19px;
+  bottom: 26px;
   vertical-align: bottom;
   position: absolute;
   width: 100%;
@@ -330,6 +330,7 @@ a {
   height: 28px;
   position absolute
   margin-top: 7px;
+  white-space: break-spaces;
 }
 .mark{
   display: inline-block;
