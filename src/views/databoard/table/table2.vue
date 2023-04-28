@@ -190,10 +190,10 @@ import 'swiper/dist/css/swiper.css'
    created() {
     this.lastMonth = moment(new Date()).subtract(1,'months').startOf('month').format('M')
     this.beforeLastMonth  = moment(new Date()).subtract(2,'months').startOf('month').format('M')
-
+    const today = moment(new Date()).format('YYYY-MM-DD')
 
     const parmas = {
-      timeCode: '2023-04-27'
+      timeCode: today
     }
     this.$service.selMonthRanking(parmas).then((res) => {
       if (res && res.data) {
@@ -293,5 +293,9 @@ text-align center
 }
 .green {
   color: green
+}
+
+.total-wrap {
+  height: 500px
 }
 </style>
