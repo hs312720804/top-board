@@ -7,14 +7,14 @@
     class="table"
     >
       <div class="table-head">
-        <div class="head-item-first">TOP排名</div>
+        <div class="head-item-first">排名</div>
         <div class="head-item">问题类型</div>
         <div class="head-item-num">责任人</div>
+        <div class="head-item-num">上月排名</div>
         <div class="head-item-num">昨日客诉量</div>
         <div class="head-item-num">{{ lastMonth }}月客诉量</div>
         <div class="head-item-num">{{ beforeLastMonth }}月客诉量</div>
         <div class="head-item-num">半年客诉量均值</div>
-        <div class="head-item-num">上月排名</div>
       </div>
 
       <!-- <slider ref="slider2" :options="options">
@@ -37,6 +37,15 @@
                   {{ table.name || '-' }}
                 </div>
                 <div class="body-item-num">
+                  {{ table.monthRanking }}
+                  <span :class="(table.monthRanking - table.beforeMonthRanking) > 0 ? 'red' : 'green'">
+                    （
+                    <span>{{ getOp(table.monthRanking, table.beforeMonthRanking) }}</span>
+                    {{ table.monthRanking - table.beforeMonthRanking }}
+                    ）
+                  </span>
+                </div>
+                <div class="body-item-num">
                   {{ table.ydayProblemTotal }}
                   <span :class="(table.ydayProblemTotal - table.beforeYdayProblemTotal) > 0 ? 'red' : 'green'">
                     （
@@ -46,7 +55,9 @@
                   </span>
                 </div>
                 <div class="body-item-num">
-                  {{ table.monthProblemTotal }}
+                  <span :class="(table.monthProblemTotal - table.beforeMonthProblemTotal) > 0 ? 'red' : 'green'">
+                    {{ table.monthProblemTotal }}
+                  </span>
                 </div>
                 <div class="body-item-num">
                   {{ table.beforeMonthProblemTotal }}
@@ -54,15 +65,7 @@
                 <div class="body-item-num">
                   {{ table.halfYearAverage }}
                 </div>
-                <div class="body-item-num">
-                  {{ table.monthRanking }}
-                  <span :class="(table.monthRanking - table.beforeMonthRanking) > 0 ? 'red' : 'green'">
-                    （
-                    <span>{{ getOp(table.monthRanking, table.beforeMonthRanking) }}</span>
-                    {{ table.monthRanking - table.beforeMonthRanking }}
-                    ）
-                  </span>
-                </div>
+                
               </div>
             </swiper-slide>
           </swiper>
@@ -102,7 +105,7 @@
       <div class="title">
         批量问题预警
       </div>
-      <Table3></Table3>
+      <!-- <Table3></Table3> -->
       
     </div>
     <div class="flex-gap-div"></div>
@@ -111,7 +114,7 @@
       <div class="title">
         异常崩溃
       </div>
-      <Table4></table4>
+      <!-- <Table4></table4> -->
       
     </div>
 
@@ -123,8 +126,8 @@
 </template>
 
 <script>
-import Table4 from './table4.vue'
-import Table3 from './table3.vue'
+// import Table4 from './table4.vue'
+// import Table3 from './table3.vue'
 import barChart from './barChart.vue'
 // import CChart from '@/components/charts/Index.vue'
 // import Swiper from 'swiper'
@@ -144,8 +147,8 @@ import 'swiper/dist/css/swiper.css'
 
  export default {
    components: {
-    Table4,
-    Table3,
+    // Table4,
+    // Table3,
     barChart,
     swiper,
 		swiperSlide
@@ -175,7 +178,7 @@ import 'swiper/dist/css/swiper.css'
         observeParents: true,
         loop: true,
         autoplay: {
-          delay: 2000,
+          delay: 5000,
           disableOnInteraction: false
         }
       }
