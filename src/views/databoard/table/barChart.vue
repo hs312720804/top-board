@@ -333,6 +333,9 @@ a {
   position absolute
   margin-top: 7px;
   white-space: break-spaces;
+  word-break: break-all;
+  word-wrap: break-word;
+  white-space: pre-wrap;
 }
 .mark{
   display: inline-block;

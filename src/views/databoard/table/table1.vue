@@ -29,13 +29,13 @@
                 <div class="body-item-first">
                   <span :class="'rank' + table.index">Top{{ table.index + 1 }}</span>
                 </div>
-                <div class="body-item">{{ table.type1 }}</div>
+                <div class="body-item">{{ table.modularName }}</div>
                 <div class="body-item-num">
                   <img class="img-style" :src="table.avatar" min-width="30" height="30"/>
                   {{ table.name || '-' }}
                 </div>
                 <div class="body-item-num">{{ table.processed }}</div>
-                <div class="body-item-num">{{ Number(table.processedRatio) * 100 }}%</div>
+                <div class="body-item-num">{{ (Number(table.processedRatio) * 100).toFixed(1) }}%</div>
               </div>
             </swiper-slide>
         </swiper>
@@ -72,13 +72,13 @@
                 <div class="body-item-first">
                   <span :class="'rank' + table.index">Top{{ table.index + 1 }}</span>
                 </div>
-                <div class="body-item">{{ table.type1 }}</div>
+                <div class="body-item">{{ table.modularName }}</div>
                 <div class="body-item-num">
                   <img class="img-style" :src="table.avatar" min-width="30" height="30"/>
                   {{ table.name || '-' }}
                 </div>
                 <div class="body-item-num">{{ table.processed }}</div>
-                <div class="body-item-num">{{ Number(table.processedRatio) * 100 }}%</div>
+                <div class="body-item-num">{{ (Number(table.processedRatio) * 100).toFixed(1) }}%</div>
               </div>
             </swiper-slide>
         </swiper>
