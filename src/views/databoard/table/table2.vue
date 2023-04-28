@@ -318,6 +318,7 @@ text-align center
   margin: 0 auto;
   top: 45px;
   position: relative;
+  opacity 0.5
   &::after {
     content: '暂无数据';
     position: absolute;

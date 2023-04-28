@@ -19,11 +19,11 @@
           <div class="head-item-num">已解决</div>
           <div class="head-item-num">解决率</div>
         </div>
-        <swiper :options="options" v-if="componentList.length > 0">
-            <swiper-slide v-for="(val,index) in componentList" :key="index">
+        <!-- <swiper :options="options" v-if="componentList.length > 0">
+            <swiper-slide v-for="(val,index) in componentList" :key="index"> -->
               <div
                 class="table-body--item"
-                v-for="(table, tableIndex) in val"
+                v-for="(table, tableIndex) in componentList"
                 :key="tableIndex"
               >
                 <div class="body-item-first">
@@ -37,8 +37,8 @@
                 <div class="body-item-num">{{ table.processed }}</div>
                 <div class="body-item-num">{{ Math.round((table.processedRatio * 100)) }}%</div>
               </div>
-            </swiper-slide>
-        </swiper>
+            <!-- </swiper-slide>
+        </swiper> -->
 
       </div>
     </div>
@@ -62,11 +62,11 @@
           <div class="head-item-num">解决率</div>
         </div>
 
-        <swiper :options="options" v-if="blackComponentList.length > 0">
-            <swiper-slide v-for="(val,index) in blackComponentList" :key="index">
+        <!-- <swiper :options="options" v-if="blackComponentList.length > 0">
+            <swiper-slide v-for="(val,index) in blackComponentList" :key="index"> -->
               <div
                 class="table-body--item"
-                v-for="(table, tableIndex) in val"
+                v-for="(table, tableIndex) in blackComponentList"
                 :key="tableIndex"
               >
                 <div class="body-item-first">
@@ -80,8 +80,8 @@
                 <div class="body-item-num">{{ table.processed }}</div>
                 <div class="body-item-num">{{ Math.round((Number(table.processedRatio) * 100)) }}%</div>
               </div>
-            </swiper-slide>
-        </swiper>
+            <!-- </swiper-slide>
+        </swiper> -->
 
         <!-- <div
           class="table-body--item"
@@ -106,16 +106,16 @@
 
 <script>
 import moment from 'moment'
-import {
-  swiper,
-  swiperSlide
-} from 'vue-awesome-swiper'
+// import {
+//   swiper,
+//   swiperSlide
+// } from 'vue-awesome-swiper'
 
-import 'swiper/dist/css/swiper.css'
+// import 'swiper/dist/css/swiper.css'
 export default {
    components: {
-    swiper,
-		swiperSlide
+    // swiper,
+		// swiperSlide
    },
    data () {
      return {
@@ -187,12 +187,14 @@ export default {
         })
 
         const tableData1 = tableData.slice(0, 5)
-        const tableData2 = tableData.slice(5, 10)
+        // const tableData2 = tableData.slice(5, 10)
 
-        this.componentList = [
-         tableData1,
-         tableData2
-        ]
+        // this.componentList = [
+        //  tableData1,
+        //  tableData2
+        // ]
+        this.componentList = tableData1
+        
       }
     })
     this.$service.blackRank(parmas).then((res) => {
@@ -212,12 +214,14 @@ export default {
         })
 
         const tableData1 = tableData.slice(0, 5)
-        const tableData2 = tableData.slice(5, 10)
+        // const tableData2 = tableData.slice(5, 10)
 
-        this.blackComponentList = [
-         tableData1,
-         tableData2
-        ]
+        // this.blackComponentList = [
+        //  tableData1,
+        //  tableData2
+        // ]
+        this.blackComponentList = tableData1
+         
       }
     })
   

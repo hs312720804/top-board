@@ -25,7 +25,7 @@
                 
                 <span :class="(answersData.total - answersData.lastYearMonthTotal) > 0 ? 'up-img' : 'down-img'"></span>
                 <span class="sub-info-num" :class="(answersData.total - answersData.lastYearMonthTotal) > 0 ? 'red' : 'green'">
-                  {{Math.round((( answersData.total - answersData.lastYearMonthTotal ) / answersData.lastYearMonthTotal * 100)) }}%
+                  {{ Math.abs(Math.round((( answersData.total - answersData.lastYearMonthTotal ) / answersData.lastYearMonthTotal) * 100)) }}%
                 </span>
               </template>
               <span v-else>-</span>
@@ -34,7 +34,7 @@
                 
                 <span :class="(answersData.total - answersData.lastMonthTotal) > 0 ? 'up-img' : 'down-img'"></span>
                 <span class="sub-info-num" :class="(answersData.total - answersData.lastMonthTotal) > 0 ? 'red' : 'green'">
-                  {{ Math.round((( answersData.total - answersData.lastMonthTotal ) / answersData.lastMonthTotal * 100)) }}%
+                  {{ Math.abs(Math.round((( answersData.total - answersData.lastMonthTotal ) / answersData.lastMonthTotal) * 100)) }}%
                 </span>
               </template>
               <span v-else>-</span>
@@ -68,7 +68,7 @@
               
               <i class="icon el-icon-star-off"></i>
               <span class="info">满意度</span>
-              <span class="num">{{ answersData.satisfactionRatio }}</span>
+              <span class="num">{{ Math.round(answersData.satisfaction /  answersData.total * 100) }}%</span>
             </div>
           </div>
         </div>
@@ -89,7 +89,7 @@
                   <span :class="(boardBugData.total - boardBugData.lastYearMonthTotal) > 0 ? 'up-img' : 'down-img'"></span>
                   <span class="sub-info-num" :class="(boardBugData.total - boardBugData.lastYearMonthTotal) > 0 ? 'red' : 'green'">
                     <!-- 8.5% -->
-                    {{ Math.round((( boardBugData.total - boardBugData.lastYearMonthTotal ) / boardBugData.lastYearMonthTotal * 100)) }}%
+                    {{ Math.abs(Math.round((( boardBugData.total - boardBugData.lastYearMonthTotal ) / boardBugData.lastYearMonthTotal) * 100)) }}%
                   </span>
                 </template>
                 <span v-else>-</span>
@@ -101,7 +101,7 @@
                 
                   <span :class="(boardBugData.total - boardBugData.lastMonthTotal) > 0 ? 'up-img' : 'down-img'"></span>
                   <span class="sub-info-num" :class="(boardBugData.total - boardBugData.lastMonthTotal) > 0 ? 'red' : 'green'">
-                    {{ Math.round((( boardBugData.total - boardBugData.lastMonthTotal ) / boardBugData.lastMonthTotal * 100)) }}%
+                    {{ Math.abs(Math.round((( boardBugData.total - boardBugData.lastMonthTotal ) / boardBugData.lastMonthTotal) * 100)) }}%
                   </span>
                 </template>
                 <span v-else>-</span>
@@ -126,7 +126,7 @@
           <div class="grid-columns--content-box" >
             <div>
               <i class="icon el-icon-success"></i>
-              <span class="info">已解决</span>
+              <span class="info">已发布</span>
               <span class="num">{{ boardBugData.release === undefined ?  '/' : boardBugData.release }}</span>
             </div>
           </div>
@@ -155,7 +155,7 @@
                 
                   <span :class="(boardNeedData.total - boardNeedData.lastYearMonthTotal) > 0 ? 'up-img' : 'down-img'"></span>
                   <span class="sub-info-num" :class="(boardNeedData.total - boardNeedData.lastYearMonthTotal) > 0 ? 'red' : 'green'">
-                    {{ Math.round((( boardNeedData.total - boardNeedData.lastYearMonthTotal ) / boardNeedData.lastYearMonthTotal * 100)) }}%
+                    {{ Math.abs(Math.round((( boardNeedData.total - boardNeedData.lastYearMonthTotal ) / boardNeedData.lastYearMonthTotal) * 100)) }}%
                   </span>
                 </template>
                 <span v-else>-</span>
@@ -166,7 +166,7 @@
                 <template v-if="boardNeedData.lastMonthTotal > 0">
                   <span :class="(boardNeedData.total - boardNeedData.lastMonthTotal) > 0 ? 'up-img' : 'down-img'"></span>
                   <span class="sub-info-num" :class="(boardNeedData.total - boardNeedData.lastMonthTotal) > 0 ? 'red' : 'green'">
-                    {{ Math.round((( boardNeedData.total - boardNeedData.lastMonthTotal ) / boardNeedData.lastMonthTotal * 100)) }}%
+                    {{ Math.abs(Math.round((( boardNeedData.total - boardNeedData.lastMonthTotal ) / boardNeedData.lastMonthTotal) * 100)) }}%
                   </span>
                 </template>
                 <span v-else>-</span>
