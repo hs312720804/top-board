@@ -104,7 +104,10 @@
     <div class="table-wrap"> 
       <div class="title">
         批量问题预警
-        <el-empty description="暂无数据" :image-size="200"></el-empty>
+
+        <div class="img-empty"></div>
+
+
       </div>
       <!-- <Table3></Table3> -->
       
@@ -114,7 +117,10 @@
     <div class="table-wrap"> 
       <div class="title">
         异常崩溃
-        <el-empty description="暂无数据" :image-size="200"></el-empty>
+
+        <div class="img-empty"></div>
+
+        <!-- <el-empty description="暂无数据" :image-size="200"></el-empty> -->
         
       </div>
       <!-- <Table4></table4> -->
@@ -169,9 +175,10 @@ import 'swiper/dist/css/swiper.css'
      return {
       lastMonth: '',
       beforeLastMonth: '',
+      tableData: [],
       tableData1: [],
       tableData2: [],
-      componentList: [],
+      componentList: [], // 总的轮播数据
       comparisonData: [], // 客诉趋势
       options: {
         // direction: 'vertical',
@@ -300,5 +307,24 @@ text-align center
 
 .total-wrap {
   height: 500px
+}
+.img-empty {
+  // background color url('image') position repeat
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-image url('~@/assets/imgs/empty.svg')
+  width: 36%;
+  height: 269px;
+  margin: 0 auto;
+  top: 45px;
+  position: relative;
+  &::after {
+    content: '暂无数据';
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    bottom: 0;
+    color: #80828b;
+  }
 }
 </style>

@@ -17,15 +17,27 @@
           <div class="grid-columns--content-box box1" style="padding: 10px 0 0 24px;">
             <div>
               <span class="info" style="margin-left: 0;">累计</span>
-              <span class="num">25205</span>
+              <span class="num">{{ answersData.total }}</span>
             </div>
             <div class="sub-info">
               同比
-              <span class="up-img"></span>
-              <span class="sub-info-num" style="margin-right: 54px">8.5%</span>
-              环比
-              <span class="down-img"></span>
-              <span class="sub-info-num" style="color:#FF3535">8.5%</span>
+              <template v-if="answersData.lastYearMonthTotal > 0">
+                
+                <span :class="(answersData.total - answersData.lastYearMonthTotal) > 0 ? 'up-img' : 'down-img'"></span>
+                <span class="sub-info-num" :class="(answersData.total - answersData.lastYearMonthTotal) > 0 ? 'red' : 'green'">
+                  {{ (( answersData.total - answersData.lastYearMonthTotal ) / answersData.lastYearMonthTotal * 100).toFixed(1) }}%
+                </span>
+              </template>
+              <span v-else>-</span>
+              <span style="margin-left: 20px">环比</span>
+              <template v-if="answersData.lastMonthTotal > 0">
+                
+                <span :class="(answersData.total - answersData.lastMonthTotal) > 0 ? 'up-img' : 'down-img'"></span>
+                <span class="sub-info-num" :class="(answersData.total - answersData.lastMonthTotal) > 0 ? 'red' : 'green'">
+                  {{ (( answersData.total - answersData.lastMonthTotal ) / answersData.lastMonthTotal * 100).toFixed(1) }}%
+                </span>
+              </template>
+              <span v-else>-</span>
             
             </div>
 
@@ -34,21 +46,21 @@
             <div>
               <span class="icon icon1"></span>
               <span class="info">待处理</span>
-              <span class="num">25205</span>
+              <span class="num">{{ answersData.waitHandle }}</span>
             </div>
           </div>
           <div class="grid-columns--content-box box3" >
             <div>
               <span class="icon icon2"></span>
               <span class="info">处理中</span>
-              <span class="num">777</span>
+              <span class="num">{{ answersData.handling }}</span>
             </div>
           </div>
           <div class="grid-columns--content-box box4" >
             <div>
               <i class="icon el-icon-success"></i>
               <span class="info">已解决</span>
-              <span class="num">25205</span>
+              <span class="num">{{ answersData.releases }}</span>
             </div>
           </div>
           <div class="grid-columns--content-box box5" >
@@ -56,7 +68,7 @@
               
               <i class="icon el-icon-star-off"></i>
               <span class="info">满意度</span>
-              <span class="num">80%</span>
+              <span class="num">{{ answersData.satisfactionRatio }}</span>
             </div>
           </div>
         </div>
@@ -123,7 +135,7 @@
               
               <i class="icon el-icon-star-off"></i>
               <span class="info">满意度</span>
-              <span class="num">{{ boardBugData.satisfactionRatio === undefined ? '/' : boardBugData.satisfactionRatio }}</span>
+              <span class="num">{{ boardBugData.satisfactionRatio === undefined ? '/' : (boardBugData.satisfactionRatio * 100 + '%')  }}</span>
             </div>
           </div>
         </div>
@@ -187,7 +199,7 @@
               
               <i class="icon el-icon-star-off"></i>
               <span class="info">满意度</span>
-              <span class="num">{{ boardNeedData.satisfactionRatio === undefined ? '/' : boardNeedData.satisfactionRatio}}</span>
+              <span class="num">{{ boardNeedData.satisfactionRatio === undefined ? '/' : (boardNeedData.satisfactionRatio * 100 + '%') }}</span>
             </div>
           </div>
         </div>
@@ -248,6 +260,7 @@ export default {
       }],
       boardBugData: {},
       boardNeedData: {},
+      answersData: []
       // scalseNum: 1,
       // pagesHeight: 1080,
     }
@@ -258,8 +271,10 @@ export default {
 
     // this.currentMonth = moment().format('YYYY-MM');  //获取当年月  2022-09
     // console.log(' currentMonth-------->', this.currentMonth)
+    const lastMonthTime = moment(new Date()).subtract(1,'months').startOf('month').format('yyyy-MM-DD HH:mm:ss')
+
     const parmas = {
-      date: '2023-03-27 16:19:50'
+      date: lastMonthTime
     }
     this.$service.boardBug(parmas).then((res) => {
       this.boardBugData = res.data || {}
@@ -267,6 +282,20 @@ export default {
     this.$service.boardNeed(parmas).then((res) => {
       this.boardNeedData = res.data || {}
     })
+
+
+    const today = moment(new Date()).format('YYYY-MM-DD')
+
+    const parmas2 = {
+      timeCode: today
+    }
+    // 咨询解答
+    this.$service.selConsultationAnswers(parmas2).then((res) => {
+      if (res && res.data) {
+        this.answersData = res.data
+      }
+    })
+
   },
   methods: {
     

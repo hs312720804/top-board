@@ -19,21 +19,27 @@
           <div class="head-item-num">已解决</div>
           <div class="head-item-num">解决率</div>
         </div>
-        <div
-          class="table-body--item"
-          v-for="(table, tableIndex) in tableData"
-          :key="tableIndex"
-        >
-          <div class="body-item-first">
-            <span :class="'rank'+tableIndex">Top{{ tableIndex + 1}}</span>
-          </div>
-          <div class="body-item">{{table.departmentName}}</div>
-          <div class="body-item-num">
-            <img :src="table.thumbnail" class="img-style" min-width="30" height="30"/>
-          </div>
-          <div class="body-item-num">{{table.contribute}}个</div>
-          <div class="body-item-num">{{table.activityServiceNumber}}个</div>
-        </div>
+        <swiper :options="options" v-if="componentList.length > 0">
+            <swiper-slide v-for="(val,index) in componentList" :key="index">
+              <div
+                class="table-body--item"
+                v-for="(table, tableIndex) in val"
+                :key="tableIndex"
+              >
+                <div class="body-item-first">
+                  <span :class="'rank' + table.index">Top{{ table.index + 1 }}</span>
+                </div>
+                <div class="body-item">{{ table.type1 }}</div>
+                <div class="body-item-num">
+                  <img class="img-style" :src="table.avatar" min-width="30" height="30"/>
+                  {{ table.name || '-' }}
+                </div>
+                <div class="body-item-num">{{ table.processed }}</div>
+                <div class="body-item-num">{{ Number(table.processedRatio) * 100 }}%</div>
+              </div>
+            </swiper-slide>
+        </swiper>
+
       </div>
     </div>
     <div class="flex-gap-div"></div>
@@ -55,7 +61,29 @@
           <div class="head-item-num">待解决</div>
           <div class="head-item-num">解决率</div>
         </div>
-        <div
+
+        <swiper :options="options" v-if="blackComponentList.length > 0">
+            <swiper-slide v-for="(val,index) in blackComponentList" :key="index">
+              <div
+                class="table-body--item"
+                v-for="(table, tableIndex) in val"
+                :key="tableIndex"
+              >
+                <div class="body-item-first">
+                  <span :class="'rank' + table.index">Top{{ table.index + 1 }}</span>
+                </div>
+                <div class="body-item">{{ table.type1 }}</div>
+                <div class="body-item-num">
+                  <img class="img-style" :src="table.avatar" min-width="30" height="30"/>
+                  {{ table.name || '-' }}
+                </div>
+                <div class="body-item-num">{{ table.processed }}</div>
+                <div class="body-item-num">{{ Number(table.processedRatio) * 100 }}%</div>
+              </div>
+            </swiper-slide>
+        </swiper>
+
+        <!-- <div
           class="table-body--item"
           v-for="(table, tableIndex) in tableData"
           :key="tableIndex"
@@ -63,48 +91,135 @@
           <div class="body-item-first">
             <span :class="'rank'+tableIndex">Top{{ tableIndex + 1}}</span>
           </div>
-          <div class="body-item">{{table.departmentName}}</div>
+          <div class="body-item">{{ table.departmentName }}</div>
           <div class="body-item-num">
-            <img :src="table.thumbnail" class="img-style" min-width="30" height="30" />
+            <img class="img-style" :src="table.avatar" min-width="30" height="30"/>
+            {{ table.name || '-' }}
           </div>
           <div class="body-item-num">{{table.contribute}}个</div>
           <div class="body-item-num">{{table.activityServiceNumber}}个</div>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
 </template>
 
 <script>
- export default {
-   components: {},
+import moment from 'moment'
+import {
+  swiper,
+  swiperSlide
+} from 'vue-awesome-swiper'
+
+import 'swiper/dist/css/swiper.css'
+export default {
+   components: {
+    swiper,
+		swiperSlide
+   },
    data () {
      return {
-      tableData: [{
-        date: '2016-05-02',
-        name: '王小虎',
-        address: '10%',
-        thumbnail: 'https://a1.cdn.91360.com/cms/bs3/upload/section/31c9f4a94769e924b7ccd764c075b29a_t.png',
-      }, {
-        date: '2016-05-04',
-        name: '王小虎',
-        address: '10%',
-        thumbnail: 'https://a1.cdn.91360.com/cms/bs3/upload/section/31c9f4a94769e924b7ccd764c075b29a_t.png',
-      }, {
-        date: '2016-05-01',
-        name: '王小虎',
-        address: '10%',
-        thumbnail: 'https://a1.cdn.91360.com/cms/bs3/upload/section/31c9f4a94769e924b7ccd764c075b29a_t.png',
-      }, {
-        date: '2016-05-03',
-        name: '王小虎',
-        address: '10%',
-        thumbnail: 'https://a1.cdn.91360.com/cms/bs3/upload/section/31c9f4a94769e924b7ccd764c075b29a_t.png',
-      }]
+      // tableData1: [],
+      // tableData2: [],
+      componentList: [], // 总的轮播数据
+      blackComponentList: [], // 总的轮播数据
+      // tableData: [
+      //   {
+      //   date: '2016-05-02',
+      //   name: '王小虎',
+      //   address: '10%',
+      //   thumbnail: 'https://a1.cdn.91360.com/cms/bs3/upload/section/31c9f4a94769e924b7ccd764c075b29a_t.png',
+      // }, {
+      //   date: '2016-05-04',
+      //   name: '王小虎',
+      //   address: '10%',
+      //   thumbnail: 'https://a1.cdn.91360.com/cms/bs3/upload/section/31c9f4a94769e924b7ccd764c075b29a_t.png',
+      // }, {
+      //   date: '2016-05-01',
+      //   name: '王小虎',
+      //   address: '10%',
+      //   thumbnail: 'https://a1.cdn.91360.com/cms/bs3/upload/section/31c9f4a94769e924b7ccd764c075b29a_t.png',
+      // }, {
+      //   date: '2016-05-03',
+      //   name: '王小虎',
+      //   address: '10%',
+      //   thumbnail: 'https://a1.cdn.91360.com/cms/bs3/upload/section/31c9f4a94769e924b7ccd764c075b29a_t.png',
+      // }
+      // ],
+      options: {
+        // direction: 'vertical',
+        // 改变swiper样式时，自动初始化swiper
+        observer: true,
+        // 监测swiper父元素，如果有变化则初始化swiper
+        observeParents: true,
+        loop: true,
+        autoplay: {
+          delay: 5000,
+          disableOnInteraction: false
+        }
+      }
      }
    },
    created() {
+    const lastMonthTime = moment(new Date()).subtract(1,'months').startOf('month').format('yyyy-MM-DD HH:mm:ss')
 
+    const parmas = {
+      date: lastMonthTime
+    }
+    this.$service.redRank(parmas).then((res) => {
+      if (res && res.data) {
+
+        const tableData = res.data.map((item, i) => {
+          let info = {}
+          if (item.userInfo) {
+            info = item.userInfo[0]
+          }
+          console.log('info-->', info)
+          return {
+            index: i,
+            ...item,
+            avatar: info && info.avatar ? info.avatar : '',
+            name: info && info.name ? info.name : '',
+          }
+        })
+
+        const tableData1 = tableData.slice(0, 5)
+        const tableData2 = tableData.slice(5, 10)
+
+        this.componentList = [
+         tableData1,
+         tableData2
+        ]
+      }
+    })
+    this.$service.blackRank(parmas).then((res) => {
+      if (res && res.data) {
+
+        const tableData = res.data.map((item, i) => {
+          let info = {}
+          if (item.userInfo) {
+            info = item.userInfo[0]
+          }
+          console.log('info-->', info)
+          return {
+            index: i,
+            ...item,
+            avatar: info && info.avatar ? info.avatar : '',
+            name: info && info.name ? info.name : '',
+          }
+        })
+
+        const tableData1 = tableData.slice(0, 5)
+        const tableData2 = tableData.slice(5, 10)
+
+        this.blackComponentList = [
+         tableData1,
+         tableData2
+        ]
+      }
+    })
+  
+    
    },
    methods: {
 
