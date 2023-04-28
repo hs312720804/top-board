@@ -5,7 +5,7 @@
       <div class="title">
         荣誉榜
         <div class="position-right">
-          累计已解决：6801
+          累计已解决：{{ proccessed }}
         </div>
       </div>
   
@@ -35,7 +35,7 @@
                   {{ table.name || '-' }}
                 </div>
                 <div class="body-item-num">{{ table.processed }}</div>
-                <div class="body-item-num">{{ (Number(table.processedRatio) * 100).toFixed(1) }}%</div>
+                <div class="body-item-num">{{ Math.round((table.processedRatio * 100)) }}%</div>
               </div>
             </swiper-slide>
         </swiper>
@@ -47,7 +47,7 @@
       <div class="title">
         黑榜
         <div class="position-right">
-          累计待解决：6801
+          累计待解决：{{ unProccessed }}
         </div>
       </div>
   
@@ -78,7 +78,7 @@
                   {{ table.name || '-' }}
                 </div>
                 <div class="body-item-num">{{ table.processed }}</div>
-                <div class="body-item-num">{{ (Number(table.processedRatio) * 100).toFixed(1) }}%</div>
+                <div class="body-item-num">{{ Math.round((Number(table.processedRatio) * 100)) }}%</div>
               </div>
             </swiper-slide>
         </swiper>
@@ -157,7 +157,9 @@ export default {
           delay: 5000,
           disableOnInteraction: false
         }
-      }
+      },
+      proccessed: '-',
+      unProccessed: '-'
      }
    },
    created() {
@@ -167,9 +169,10 @@ export default {
       date: lastMonthTime
     }
     this.$service.redRank(parmas).then((res) => {
-      if (res && res.data) {
-
-        const tableData = res.data.map((item, i) => {
+      if (res && res.data && res.data.list) {
+        this.proccessed = res.data.proccessed
+        this.unProccessed = res.data.unProccessed
+        const tableData = res.data.list.map((item, i) => {
           let info = {}
           if (item.userInfo) {
             info = item.userInfo[0]
