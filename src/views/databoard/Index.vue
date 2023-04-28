@@ -37,7 +37,7 @@
 
         <slideritem v-for="(val,index) in componentList" :key="index"> -->
           
-          <swiper :options="options" v-if="componentList.length > 0">
+          <swiper :options="options">
             <swiper-slide v-for="(val,index) in componentList" :key="index">
               <component :is="val"></component>
             </swiper-slide>
@@ -89,7 +89,7 @@ export default {
         observeParents: true,
         loop: true,
         autoplay: {
-          delay: 15000,
+          delay: 2000,
           disableOnInteraction: false
         }
       }
