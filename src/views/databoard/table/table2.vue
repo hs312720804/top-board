@@ -104,6 +104,7 @@
     <div class="table-wrap"> 
       <div class="title">
         批量问题预警
+        <el-empty description="暂无数据" :image-size="200"></el-empty>
       </div>
       <!-- <Table3></Table3> -->
       
@@ -113,6 +114,8 @@
     <div class="table-wrap"> 
       <div class="title">
         异常崩溃
+        <el-empty description="暂无数据" :image-size="200"></el-empty>
+        
       </div>
       <!-- <Table4></table4> -->
       

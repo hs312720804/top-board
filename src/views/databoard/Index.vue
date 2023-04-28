@@ -72,7 +72,7 @@ export default {
       pWidth: 1920,
       options: {
         currentPage: 0,
-        autoplay: '15000',
+        autoplay: '1000000',
         loop:true
       }
     }

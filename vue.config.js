@@ -28,9 +28,9 @@ module.exports = defineConfig({
       'Access-Control-Allow-Origin': '*'
     },
     proxy: {
-      '/databoard-api': {
+      '/topBoard-api': {
         target: 'http://' + BACKEND,
-        pathRewrite: { '^/databoard-api': '' }
+        pathRewrite: { '^/topBoard-api': '' }
       }
     },
     historyApiFallback: true

@@ -49,7 +49,7 @@ export default function fetch ({
 
   const option = {
     method,
-    url: `/databoard-api/${url}`,
+    url: `/topBoard-api/${url}`,
     data: pushData,
     params,
     ...options

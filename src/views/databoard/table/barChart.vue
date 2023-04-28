@@ -261,12 +261,14 @@ a {
   display: flex;
   justify-content: space-around;
   flex-direction: row;
-  align-items: end;
+  // align-items: end;
   bottom: 26px;
   vertical-align: bottom;
   position: absolute;
   width: 100%;
   box-sizing: border-box;
+  align-items: flex-end;
+  -webkit-align-items: flex-end;
 }
 .bar-left div{
   // display:inline-block;
