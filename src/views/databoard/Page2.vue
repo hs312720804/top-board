@@ -33,7 +33,7 @@
       <div class="grid-columns--box">
         <!-- {{ tableData1 }}
         {{ tableData2 }} -->
-        <TableContent2 :tableData1="tableData1" :tableData2="tableData2"></TableContent2>
+        <TableContent2 :tableData1="tableData1" :tableData2="tableData2" :currentPage="currentPage"></TableContent2>
       </div>
       
     </div>
@@ -62,6 +62,10 @@ export default {
   props: {
     menuId: [String, Number],
     pWidth: {
+      type: [String, Number],
+      default: ''
+    },
+    currentPage: {
       type: [String, Number],
       default: ''
     }

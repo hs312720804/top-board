@@ -20,9 +20,12 @@
       <!-- <slider ref="slider2" :options="options">
 
         <slideritem > -->
-
-          <swiper :options="options" v-if="componentList.length > 0">
+          <swiper :options="options" ref="mySwiper" v-if="componentList.length > 0">
             <swiper-slide v-for="(val,index) in componentList" :key="index">
+            
+      <!-- <slider ref="mySwiper" :options="options" v-if="componentList.length > 0">
+
+        <slideritem v-for="(val,index) in componentList" :key="index"> -->
               <div
                 class="table-body--item"
                 v-for="(table, tableIndex) in val"
@@ -150,6 +153,7 @@ import {
 
 import 'swiper/dist/css/swiper.css'
 
+// import { slider, slideritem } from 'vue-concise-slider'
 
 // import { Virtual } from 'swiper';
 // import { Swiper, SwiperSlide } from 'swiper/vue';
@@ -161,15 +165,22 @@ import 'swiper/dist/css/swiper.css'
     barChart,
     swiper,
 		swiperSlide
+    // slider,
+    // slideritem
   },
-  props: {
+  // props: {
     // tableData1: {
     //   type: Array,
     //   default: () => []
     // },
     // tableData2: {
       // }
-   
+  // },
+  props: {
+    currentPage: {
+      type: [String, Number],
+      default: ''
+    }
   },
    data () {
      return {
@@ -192,11 +203,32 @@ import 'swiper/dist/css/swiper.css'
           disableOnInteraction: false
         }
       }
+      // options: {
+      //   currentPage: 0,
+      //   autoplay: '1000',
+      //   loop: true
+      // }
      }
    },
    computed: {
-    
-   },
+      swiper() {
+        return this.$refs.mySwiper.swiper
+      }
+    },
+    watch: {
+      currentPage: {
+        handler() {
+          this.swiper.slideTo(1, 0, false)
+          // console.log('this.$refs.mySwiper------->', this.$refs.mySwiper)
+          // // this.$refs.mySwiper.slide(1)
+          // this.$nextTick(() => {
+          //   this.$refs.mySwiper.$emit('slideTo', 0)
+          // })
+          // this.$refs.mySwiper.$emit('autoplayStart',1000)
+        },
+        immediate: true
+      }
+    },
    created() {
     this.lastMonth = moment(new Date()).subtract(1,'months').startOf('month').format('M')
     this.beforeLastMonth  = moment(new Date()).subtract(2,'months').startOf('month').format('M')

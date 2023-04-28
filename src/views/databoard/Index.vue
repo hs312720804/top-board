@@ -33,10 +33,10 @@
           '-ms-transform':`scale(${scalseNum})`
         }"
       >
-      <slider ref="slider" :options="options">
+      <slider ref="slider" :options="options" @slide='slide'>
 
         <slideritem v-for="(val,index) in componentList" :key="index">
-          <component :is="val"></component>
+          <component :is="val" :currentPage="currentPage"></component>
         </slideritem>
       </slider>
 </div>
@@ -73,8 +73,9 @@ export default {
       options: {
         currentPage: 0,
         autoplay: '15000',
-        loop:true
-      }
+        loop: true
+      },
+      currentPage: 0
     }
   },
   mounted() {
@@ -89,6 +90,11 @@ export default {
     this.bannerPoint()
   },
   methods: {
+    // 监听事件
+    slide (data) {
+      console.log('1-------------->', data)
+      this.currentPage = data.currentPage
+    },
     resize_window (width) {
       const scalseNum = Number((width) / 1920)
       this.scalseNum = scalseNum
