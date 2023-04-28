@@ -196,9 +196,8 @@ export default {
       }
     })
     this.$service.blackRank(parmas).then((res) => {
-      if (res && res.data) {
-
-        const tableData = res.data.map((item, i) => {
+      if (res && res.data && res.data.list) {
+        const tableData = res.data.list.map((item, i) => {
           let info = {}
           if (item.userInfo) {
             info = item.userInfo[0]
