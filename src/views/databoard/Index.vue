@@ -33,12 +33,18 @@
           '-ms-transform':`scale(${scalseNum})`
         }"
       >
-      <slider ref="slider" :options="options">
+      <!-- <slider ref="slider" :options="options">
 
-        <slideritem v-for="(val,index) in componentList" :key="index">
-          <component :is="val"></component>
-        </slideritem>
-      </slider>
+        <slideritem v-for="(val,index) in componentList" :key="index"> -->
+          
+          <swiper :options="options" v-if="componentList.length > 0">
+            <swiper-slide v-for="(val,index) in componentList" :key="index">
+              <component :is="val"></component>
+            </swiper-slide>
+          </swiper>
+
+        <!-- </slideritem>
+      </slider> -->
 </div>
 </div>
 </el-scrollbar>
@@ -51,14 +57,19 @@ import elementResizeDetectorMaker from 'element-resize-detector'
 import page from './Page.vue'
 import page2 from './Page2.vue'
 
-import { slider, slideritem } from 'vue-concise-slider'
+// import { slider, slideritem } from 'vue-concise-slider'
+import {
+  swiper,
+  swiperSlide
+} from 'vue-awesome-swiper'
 
+import 'swiper/dist/css/swiper.css'
 export default {
   components: {
     page,
     page2,
-    slider,
-    slideritem
+    swiper,
+  swiperSlide
   },
   props: {
     menuId: [String, Number]
@@ -71,9 +82,16 @@ export default {
       show: true,
       pWidth: 1920,
       options: {
-        currentPage: 0,
-        autoplay: '1000000',
-        loop:true
+        // direction: 'vertical',
+        // 改变swiper样式时，自动初始化swiper
+        observer: true,
+        // 监测swiper父元素，如果有变化则初始化swiper
+        observeParents: true,
+        loop: true,
+        autoplay: {
+          delay: 15000,
+          disableOnInteraction: false
+        }
       }
     }
   },

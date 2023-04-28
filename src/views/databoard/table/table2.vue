@@ -16,47 +16,59 @@
         <div class="head-item-num">半年客诉量均值</div>
         <div class="head-item-num">上月排名</div>
       </div>
-      <div
-        class="table-body--item"
-        v-for="(table, tableIndex) in tableData1"
-        :key="tableIndex"
-      >
-        <div class="body-item-first">
-          <span :class="'rank' + table.index">Top{{ table.index + 1 }}</span>
-        </div>
-        <div class="body-item">{{table.modularName }}</div>
-        <div class="body-item-num">
-          <img class="img-style" :src="table.avatar" min-width="30" height="30"/>
-          {{ table.name || '-' }}
-        </div>
-        <div class="body-item-num">
-          {{ table.ydayProblemTotal }}
-          <span :class="(table.ydayProblemTotal - table.beforeYdayProblemTotal) > 0 ? 'red' : 'green'">
-            （
-            <span>{{ getOp(table.ydayProblemTotal, table.beforeYdayProblemTotal) }}</span>
-            {{ table.ydayProblemTotal - table.beforeYdayProblemTotal }}
-            ）
-          </span>
-        </div>
-        <div class="body-item-num">
-          {{ table.monthProblemTotal }}
-        </div>
-        <div class="body-item-num">
-          {{ table.beforeMonthProblemTotal }}
-        </div>
-        <div class="body-item-num">
-          {{ table.halfYearAverage }}
-        </div>
-        <div class="body-item-num">
-          {{ table.monthRanking }}
-          <span :class="(table.monthRanking - table.beforeMonthRanking) > 0 ? 'red' : 'green'">
-            （
-            <span>{{ getOp(table.monthRanking, table.beforeMonthRanking) }}</span>
-            {{ table.monthRanking - table.beforeMonthRanking }}
-            ）
-          </span>
-        </div>
-      </div>
+
+      <!-- <slider ref="slider2" :options="options">
+
+        <slideritem > -->
+
+          <swiper :options="options" v-if="componentList.length > 0">
+            <swiper-slide v-for="(val,index) in componentList" :key="index">
+              <div
+                class="table-body--item"
+                v-for="(table, tableIndex) in val"
+                :key="tableIndex"
+              >
+                <div class="body-item-first">
+                  <span :class="'rank' + table.index">Top{{ table.index + 1 }}</span>
+                </div>
+                <div class="body-item">{{table.modularName }}</div>
+                <div class="body-item-num">
+                  <img class="img-style" :src="table.avatar" min-width="30" height="30"/>
+                  {{ table.name || '-' }}
+                </div>
+                <div class="body-item-num">
+                  {{ table.ydayProblemTotal }}
+                  <span :class="(table.ydayProblemTotal - table.beforeYdayProblemTotal) > 0 ? 'red' : 'green'">
+                    （
+                    <span>{{ getOp(table.ydayProblemTotal, table.beforeYdayProblemTotal) }}</span>
+                    {{ table.ydayProblemTotal - table.beforeYdayProblemTotal }}
+                    ）
+                  </span>
+                </div>
+                <div class="body-item-num">
+                  {{ table.monthProblemTotal }}
+                </div>
+                <div class="body-item-num">
+                  {{ table.beforeMonthProblemTotal }}
+                </div>
+                <div class="body-item-num">
+                  {{ table.halfYearAverage }}
+                </div>
+                <div class="body-item-num">
+                  {{ table.monthRanking }}
+                  <span :class="(table.monthRanking - table.beforeMonthRanking) > 0 ? 'red' : 'green'">
+                    （
+                    <span>{{ getOp(table.monthRanking, table.beforeMonthRanking) }}</span>
+                    {{ table.monthRanking - table.beforeMonthRanking }}
+                    ）
+                  </span>
+                </div>
+              </div>
+            </swiper-slide>
+          </swiper>
+        <!-- </slideritem>
+       
+      </slider> -->
           
 
     
@@ -117,6 +129,15 @@ import barChart from './barChart.vue'
 // import CChart from '@/components/charts/Index.vue'
 // import Swiper from 'swiper'
 import moment from 'moment'
+// import { slider, slideritem } from 'vue-concise-slider'
+	// 局部引入 vue-awesome-swiper 及其样式
+import {
+  swiper,
+  swiperSlide
+} from 'vue-awesome-swiper'
+
+import 'swiper/dist/css/swiper.css'
+
 
 // import { Virtual } from 'swiper';
 // import { Swiper, SwiperSlide } from 'swiper/vue';
@@ -125,7 +146,9 @@ import moment from 'moment'
    components: {
     Table4,
     Table3,
-    barChart
+    barChart,
+    swiper,
+		swiperSlide
   },
   props: {
     // tableData1: {
@@ -142,7 +165,20 @@ import moment from 'moment'
       beforeLastMonth: '',
       tableData1: [],
       tableData2: [],
-      comparisonData: [] // 客诉趋势
+      componentList: [],
+      comparisonData: [], // 客诉趋势
+      options: {
+        // direction: 'vertical',
+        // 改变swiper样式时，自动初始化swiper
+        observer: true,
+        // 监测swiper父元素，如果有变化则初始化swiper
+        observeParents: true,
+        loop: true,
+        autoplay: {
+          delay: 2000,
+          disableOnInteraction: false
+        }
+      }
      }
    },
    computed: {
@@ -174,7 +210,10 @@ import moment from 'moment'
 
         this.tableData1 = this.tableData.slice(0, 5)
         this.tableData2 = this.tableData.slice(5, 10)
-
+        this.componentList = [
+         this.tableData1,
+         this.tableData2
+        ]
         console.log('tableData-------->', this.tableData)
       }
     })
