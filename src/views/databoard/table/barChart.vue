@@ -34,14 +34,14 @@
     </div>
     <div class="bar-right">
       <div class="module" v-for="(item,index) in complainList.slice(0,10)" :key="index">
-        <div class="module-up-down" v-if="getPercentageChange(item.twoWeeks,item.lastWeek) !=0">
-          <span :class="item.twoWeeks>item.lastWeek?'down':'up'">{{ getPercentageChange(item.twoWeeks,item.lastWeek) }}%</span>
-          <img v-if="item.twoWeeks>item.lastWeek" src="../../../assets/imgs/arrow(1).svg"/>
-          <img v-if="item.twoWeeks<item.lastWeek" src="../../../assets/imgs/arrow(2).svg" style="transform: rotate(180deg);"/>
+        <div class="module-up-down" v-if="getPercentageChange(item.beforeMonthProblemTotal,item.monthProblemTotal) !=0">
+          <span :class="item.beforeMonthProblemTotal>item.monthProblemTotal?'down':'up'">{{ getPercentageChange(item.beforeMonthProblemTotal,item.monthProblemTotal) }}%</span>
+          <img v-if="item.beforeMonthProblemTotal>item.monthProblemTotal" src="../../../assets/imgs/arrow(1).svg"/>
+          <img v-if="item.beforeMonthProblemTotal<item.monthProblemTotal" src="../../../assets/imgs/arrow(2).svg" style="transform: rotate(180deg);"/>
         </div>
-        <div class="rec_item_wrapper" :style="{height:item.twoWeeks*(280/complainMaxNum)>item.lastWeek*(280/complainMaxNum)?item.twoWeeks*(280/complainMaxNum)+'px':item.lastWeek*(280/complainMaxNum)+'px'}">
-          <div class="twoWeeks bar" :class="item.twoWeeks*(280/complainMaxNum) > 2 ? 'radius':''" :style="{ height: item.twoWeeks*(280/complainMaxNum)+'px' }"></div>
-          <div class="lastWeek bar" :class="item.lastWeek*(280/complainMaxNum) > 2 ? 'radius':''" :style="{ height: item.lastWeek*(280/complainMaxNum)+'px' }"></div>                
+        <div class="rec_item_wrapper" :style="{height:item.beforeMonthProblemTotal*(280/complainMaxNum)>item.monthProblemTotal*(280/complainMaxNum)?item.beforeMonthProblemTotal*(280/complainMaxNum)+'px':item.monthProblemTotal*(280/complainMaxNum)+'px'}">
+          <div class="beforeMonthProblemTotal bar" :class="item.beforeMonthProblemTotal*(280/complainMaxNum) > 2 ? 'radius':''" :style="{ height: item.beforeMonthProblemTotal*(280/complainMaxNum)+'px' }"></div>
+          <div class="monthProblemTotal bar" :class="item.monthProblemTotal*(280/complainMaxNum) > 2 ? 'radius':''" :style="{ height: item.monthProblemTotal*(280/complainMaxNum)+'px' }"></div>                
         </div>
         <div class="modle-name">{{ item.modularName }}</div>              
       </div>
@@ -60,7 +60,13 @@ export default {
     return {
       complainMaxStyle:0,
       complainMaxNum:0,//柱状最大值
-      complainList: [],
+      // complainList: [],
+    }
+  },
+  props: {
+    complainList: {
+      type: Array,
+      default: () => []
     }
   },
   created() {
@@ -75,37 +81,38 @@ export default {
       console.log(this.complainMaxStyle)
 
       //一本周客诉量
-      this.complainList = [{
-        twoWeeks: 10,
-        lastWeek: 20,
-        modularName: '111'
-      },{
-        twoWeeks: 1000,
-        lastWeek: 2530,
-        modularName: '456'
-      },{
-        twoWeeks: 100,
-        lastWeek: 20,
-        modularName: '111'
-      },{
-        twoWeeks: 1000,
-        lastWeek: 2530,
-        modularName: '555'
-      },{
-        twoWeeks: 1000,
-        lastWeek: 2530,
-        modularName: '555'
-      }]
+      // this.complainList = [{
+      //   beforeMonthProblemTotal: 10,
+      //   monthProblemTotal: 20,
+      //   modularName: '111'
+      // },{
+      //   beforeMonthProblemTotal: 1000,
+      //   monthProblemTotal: 2530,
+      //   modularName: '456'
+      // },{
+      //   beforeMonthProblemTotal: 100,
+      //   monthProblemTotal: 20,
+      //   modularName: '111'
+      // },{
+      //   beforeMonthProblemTotal: 1000,
+      //   monthProblemTotal: 2530,
+      //   modularName: '555'
+      // },{
+      //   beforeMonthProblemTotal: 1000,
+      //   monthProblemTotal: 2530,
+      //   modularName: '555'
+      // }]
       let maxNum = []
       let length = 0
+      debugger
       if(this.complainList.length>10){
         length = 10
       }else{
         length = this.complainList.length
       }
       for (let i = 0; i < length; i++) {
-        maxNum.push(this.complainList[i].lastWeek)
-        maxNum.push(this.complainList[i].twoWeeks)
+        maxNum.push(this.complainList[i].monthProblemTotal)
+        maxNum.push(this.complainList[i].beforeMonthProblemTotal)
       }
 
       if( 0 < Math.max(...maxNum) && Math.max(...maxNum) <= 50 ) {
@@ -308,21 +315,21 @@ a {
 .radius{
   border-radius: 2px 2px 0px 0px;
 }
-.twoWeeks{
+.beforeMonthProblemTotal{
   background: #4393FF; 
 }
-.lastWeek{
+.monthProblemTotal{
  background: #35D0C0;
 }
 .modle-name{
-  width: 27px;
+  width: 52px;
   color: #FFF;
   line-height: 14px;
   font-size: 10px;
   display: inline-flex;
   height: 28px;
   position absolute
-  margin-top: 22px;
+  margin-top: 7px;
 }
 .mark{
   display: inline-block;

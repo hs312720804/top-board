@@ -5,7 +5,7 @@
       <div class="title">
         荣誉榜
         <div class="position-right">
-          已解决：6801
+          累计已解决：6801
         </div>
       </div>
   
@@ -14,9 +14,9 @@
       >
         <div class="table-head">
           <div class="head-item-first">排名</div>
-          <div class="head-item">应用名称</div>
-          <div class="head-item-num">头像</div>
-          <div class="head-item-num">已解决问题</div>
+          <div class="head-item">问题类型</div>
+          <div class="head-item-num">责任人</div>
+          <div class="head-item-num">已解决</div>
           <div class="head-item-num">解决率</div>
         </div>
         <div
@@ -41,7 +41,7 @@
       <div class="title">
         黑榜
         <div class="position-right">
-          待解决：6801
+          累计待解决：6801
         </div>
       </div>
   
@@ -50,9 +50,9 @@
       >
         <div class="table-head">
           <div class="head-item-first">排名</div>
-          <div class="head-item">应用名称</div>
-          <div class="head-item-num">头像</div>
-          <div class="head-item-num">已解决问题</div>
+          <div class="head-item">问题类型</div>
+          <div class="head-item-num">责任人</div>
+          <div class="head-item-num">待解决</div>
           <div class="head-item-num">解决率</div>
         </div>
         <div

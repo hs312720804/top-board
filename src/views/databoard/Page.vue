@@ -67,18 +67,33 @@
         </div>
         <div class="grid-columns--content">
           <div class="grid-columns--content-box">
-            <span class="info" style="margin-left: 0;">BUG</span>
+            <span class="info" style="margin-left: 0;margin-right: 10px;">BUG</span>
             <span class="num">{{ boardBugData.total === undefined ?  '/' : boardBugData.total }}</span>
             <div class="sub-info left-right-layout" >
-              <div>
+              <div >
                 同比
-                <span class="up-img"></span>
-                <span class="sub-info-num" >8.5%</span>
+                <template v-if="boardBugData.lastYearMonthTotal > 0">
+                
+                  <span :class="(boardBugData.total - boardBugData.lastYearMonthTotal) > 0 ? 'up-img' : 'down-img'"></span>
+                  <span class="sub-info-num" :class="(boardBugData.total - boardBugData.lastYearMonthTotal) > 0 ? 'red' : 'green'">
+                    <!-- 8.5% -->
+                    {{ (( boardBugData.total - boardBugData.lastYearMonthTotal ) / boardBugData.lastYearMonthTotal * 100).toFixed(1)}}%
+                  </span>
+                </template>
+                <span v-else>-</span>
+
               </div>
-              <div>
+              <div >
                 环比
-                <span class="down-img"></span>
-                <span class="sub-info-num" style="color:#FF3535">8.5%</span>
+                <template v-if="boardBugData.lastMonthTotal > 0">
+                
+                  <span :class="(boardBugData.total - boardBugData.lastMonthTotal) > 0 ? 'up-img' : 'down-img'"></span>
+                  <span class="sub-info-num" :class="(boardBugData.total - boardBugData.lastMonthTotal) > 0 ? 'red' : 'green'">
+                    {{ (( boardBugData.total - boardBugData.lastMonthTotal ) / boardBugData.lastMonthTotal * 100).toFixed(1) }}%
+                  </span>
+                </template>
+                <span v-else>-</span>
+
               </div>
             </div>
           </div>
@@ -119,18 +134,30 @@
         </div>
         <div class="grid-columns--content">
           <div class="grid-columns--content-box">
-            <span class="info" style="margin-left: 0;">转需求</span>
+            <span class="info" style="margin-left: 0;margin-right: 15px;">转需求</span>
             <span class="num">{{ boardNeedData.total === undefined ? '/' : boardNeedData.total }}</span>
             <div class="sub-info left-right-layout" >
               <div>
                 同比
-                <span class="up-img"></span>
-                <span class="sub-info-num" >8.5%</span>
+                <template v-if="boardNeedData.lastYearMonthTotal > 0">
+                
+                  <span :class="(boardNeedData.total - boardNeedData.lastYearMonthTotal) > 0 ? 'up-img' : 'down-img'"></span>
+                  <span class="sub-info-num" :class="(boardNeedData.total - boardNeedData.lastYearMonthTotal) > 0 ? 'red' : 'green'">
+                    {{ (( boardNeedData.total - boardNeedData.lastYearMonthTotal ) / boardNeedData.lastYearMonthTotal * 100).toFixed(1) }}%
+                  </span>
+                </template>
+                <span v-else>-</span>
+
               </div>
-              <div>
+              <div >
                 环比
-                <span class="down-img"></span>
-                <span class="sub-info-num" style="color:#FF3535">8.5%</span>
+                <template v-if="boardNeedData.lastMonthTotal > 0">
+                  <span :class="(boardNeedData.total - boardNeedData.lastMonthTotal) > 0 ? 'up-img' : 'down-img'"></span>
+                  <span class="sub-info-num" :class="(boardNeedData.total - boardNeedData.lastMonthTotal) > 0 ? 'red' : 'green'">
+                    {{ (( boardNeedData.total - boardNeedData.lastMonthTotal ) / boardNeedData.lastMonthTotal * 100).toFixed(1) }}%
+                  </span>
+                </template>
+                <span v-else>-</span>
               </div>
             </div>
           </div>

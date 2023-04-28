@@ -23,6 +23,7 @@
     "style-resources-loader": "^1.5.0",
     "swiper": "5",
     "vue": "^2.6.11",
+    "vue-concise-slider": "^4.2.5",
     "vue-router": "^3.1.5",
     "webpack": "^5.74.0"
   },

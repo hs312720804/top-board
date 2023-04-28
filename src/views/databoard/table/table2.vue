@@ -1,6 +1,8 @@
 <template>
 <div>
+  
   <div class="table-wrap" > 
+    
     <div
     class="table"
     >
@@ -10,61 +12,58 @@
         <div class="head-item-num">责任人</div>
         <div class="head-item-num">昨日客诉量</div>
         <div class="head-item-num">{{ lastMonth }}月客诉量</div>
-        <div class="head-item-num">{{beforeLastMonth}}月客诉量</div>
+        <div class="head-item-num">{{ beforeLastMonth }}月客诉量</div>
         <div class="head-item-num">半年客诉量均值</div>
         <div class="head-item-num">上月排名</div>
       </div>
-
-      <div id="rank">
-        <div class="swiper-wrapper">
-          <div class="swiper-slide">
-            <div
-              class="table-body--item"
-              v-for="(table, tableIndex) in tableData.slice(0,5)"
-              :key="tableIndex"
-            >
-              <div class="body-item-first">
-                <span :class="'rank' + table.index">Top{{ table.index + 1 }}</span>
-              </div>
-              <div class="body-item">{{table.modularName }}</div>
-              <div class="body-item-num">
-                <img class="img-style" :src="table.thumbnail" min-width="30" height="30"/>
-                {{ table.name }}
-              </div>
-              <div class="body-item-num">{{ table.ydayProblemTotal }}</div>
-              <div class="body-item-num">{{ table.monthProblemTotal }}</div>
-              <div class="body-item-num">{{ table.beforeMonthProblemTotal }}</div>
-              <div class="body-item-num">{{ table.halfYearAverage }}</div>
-              <div class="body-item-num">{{ table.monthRanking }}</div>
-            </div>
-          </div>
-          <div class="swiper-slide">
-            <div
-              class="table-body--item"
-              v-for="(table, tableIndex) in tableData.slice(5,10)"
-              :key="tableIndex"
-            >
-              <div class="body-item-first">
-                <span :class="'rank' + table.index">Top{{ table.index + 1}}</span>
-              </div>
-              <div class="body-item">{{ table.modularName }}</div>
-              <div class="body-item-num">
-                <img class="img-style" :src="table.thumbnail" min-width="30" height="30"/>
-                {{ table.name }}
-              </div>
-              <div class="body-item-num">{{ table.ydayProblemTotal }}</div>
-              <div class="body-item-num">{{ table.monthProblemTotal }}</div>
-              <div class="body-item-num">{{ table.beforeMonthProblemTotal }}</div>
-              <div class="body-item-num">{{ table.halfYearAverage }}</div>
-              <div class="body-item-num">{{ table.monthRanking }}</div>
-            </div>
-          </div>
+      <div
+        class="table-body--item"
+        v-for="(table, tableIndex) in tableData1"
+        :key="tableIndex"
+      >
+        <div class="body-item-first">
+          <span :class="'rank' + table.index">Top{{ table.index + 1 }}</span>
+        </div>
+        <div class="body-item">{{table.modularName }}</div>
+        <div class="body-item-num">
+          <img class="img-style" :src="table.avatar" min-width="30" height="30"/>
+          {{ table.name || '-' }}
+        </div>
+        <div class="body-item-num">
+          {{ table.ydayProblemTotal }}
+          <span :class="(table.ydayProblemTotal - table.beforeYdayProblemTotal) > 0 ? 'red' : 'green'">
+            （
+            <span>{{ getOp(table.ydayProblemTotal, table.beforeYdayProblemTotal) }}</span>
+            {{ table.ydayProblemTotal - table.beforeYdayProblemTotal }}
+            ）
+          </span>
+        </div>
+        <div class="body-item-num">
+          {{ table.monthProblemTotal }}
+        </div>
+        <div class="body-item-num">
+          {{ table.beforeMonthProblemTotal }}
+        </div>
+        <div class="body-item-num">
+          {{ table.halfYearAverage }}
+        </div>
+        <div class="body-item-num">
+          {{ table.monthRanking }}
+          <span :class="(table.monthRanking - table.beforeMonthRanking) > 0 ? 'red' : 'green'">
+            （
+            <span>{{ getOp(table.monthRanking, table.beforeMonthRanking) }}</span>
+            {{ table.monthRanking - table.beforeMonthRanking }}
+            ）
+          </span>
         </div>
       </div>
+          
 
-     
+    
     </div>
+    
   </div>
+
 
   <div class="total-wrap" style="margin-top: 20px">
     <div class="table-wrap" style="flex: 0 0 680px"> 
@@ -83,7 +82,7 @@
           :option="optionsData"
           theme="black"
         ></c-chart> -->
-        <barChart></barChart>
+        <barChart v-if="comparisonData.length > 0" :complainList="comparisonData"></barChart>
       </div>
     </div>
     <div class="flex-gap-div"></div>
@@ -116,7 +115,7 @@ import Table4 from './table4.vue'
 import Table3 from './table3.vue'
 import barChart from './barChart.vue'
 // import CChart from '@/components/charts/Index.vue'
-import Swiper from 'swiper'
+// import Swiper from 'swiper'
 import moment from 'moment'
 
 // import { Virtual } from 'swiper';
@@ -129,54 +128,103 @@ import moment from 'moment'
     barChart
   },
   props: {
-    // tableData: {
+    // tableData1: {
     //   type: Array,
     //   default: () => []
-    // }
+    // },
+    // tableData2: {
+      // }
+   
   },
    data () {
      return {
       lastMonth: '',
       beforeLastMonth: '',
-      tableData: [],
+      tableData1: [],
+      tableData2: [],
+      comparisonData: [] // 客诉趋势
      }
+   },
+   computed: {
+    
    },
    created() {
     this.lastMonth = moment(new Date()).subtract(1,'months').startOf('month').format('M')
     this.beforeLastMonth  = moment(new Date()).subtract(2,'months').startOf('month').format('M')
-      for (let i = 0; i < 10; i ++) {
-        this.tableData.push({
-          index: i,
-          date: '2016-05-02',
-          name: `王小虎${i}`,
-          address: '10%',
-          thumbnail: 'https://a1.cdn.91360.com/cms/bs3/upload/section/31c9f4a94769e924b7ccd764c075b29a_t.png',
+
+
+    const parmas = {
+      timeCode: '2023-04-27'
+    }
+    this.$service.selMonthRanking(parmas).then((res) => {
+      if (res && res.data) {
+        this.tableData = res.data.map((item, i) => {
+          let info = {}
+          if (item.userInfo) {
+            info = JSON.parse(item.userInfo)[0]
+          }
+          console.log('info-->', info)
+          return {
+            index: i,
+            ...item,
+            avatar: info && info.avatar ? info.avatar : '',
+            name: info && info.name ? info.name : '',
+          }
         })
+
+        this.tableData1 = this.tableData.slice(0, 5)
+        this.tableData2 = this.tableData.slice(5, 10)
+
+        console.log('tableData-------->', this.tableData)
       }
+    })
+    this.$service.complaintComparison(parmas).then((res) => {
+      debugger
+      if (res && res.data) {
+        this.comparisonData = res.data
+      }
+    })
+    // for (let i = 0; i < 10; i ++) {
+    //   this.tableData.push({
+    //     index: i,
+    //     date: '2016-05-02',
+    //     name: `王小虎${i}`,
+    //     address: '10%',
+    //     thumbnail: 'https://a1.cdn.91360.com/cms/bs3/upload/section/31c9f4a94769e924b7ccd764c075b29a_t.png',
+    //   })
+    // }
     
    },
    mounted () {
-    new Swiper("#rank", {
-      // direction: 'vertical',  //滚动方向
-      loop: true,
-      initialSlide: 0, //设定初始化时slide的索引
-      autoplay: {
-        delay: 6000, // 1秒切换一次
-        disableOnInteraction: false
-      },
-      updateOnImagesReady: true,
-      slidesPerView: 1,  //设置slider容器能够同时显示的slides数量
-      watchOverflow: true,//因为仅有1个slide，swiper无效
-      //spaceBetween : '10%',按container的百分比
+    // new Swiper("#rank", {
+    //   // direction: 'vertical',  //滚动方向
+    //   loop: true,
+    //   initialSlide: 0, //设定初始化时slide的索引
+    //   autoplay: {
+    //     delay: 8000, // 1秒切换一次
+    //     disableOnInteraction: false
+    //   },
+    //   updateOnImagesReady: true,
+    //   slidesPerView: 1,  //设置slider容器能够同时显示的slides数量
+    //   watchOverflow: true,//因为仅有1个slide，swiper无效
+    //   //spaceBetween : '10%',按container的百分比
 
-      observer: true, //在 Swiper 的上启用动态检查器(Mutation Observer)，如果你更改swiper 的样式（隐藏/显示）或修改其子元素（添加/删除幻灯片），Swiper 会更新（重新初始化）并触发 observerUpdate 事件。
-      observeParents: true,
-      observeSlideChildren: true,
+    //   observer: true, //在 Swiper 的上启用动态检查器(Mutation Observer)，如果你更改swiper 的样式（隐藏/显示）或修改其子元素（添加/删除幻灯片），Swiper 会更新（重新初始化）并触发 observerUpdate 事件。
+    //   observeParents: true,
+    //   observeSlideChildren: true,
        
-    })
+    // })
   },
   methods: {
-
+    getOp(val1, val2) {
+      if (val1 > val2) {
+        return '+'
+      } else if (val1 < val2) {
+        return ''
+      } else if (val1 === val2) {
+        return ''
+      }
+    }
   }
  }
 </script>
@@ -197,5 +245,11 @@ text-align center
 
 .table-body--item {
   border-top 1px solid rgba(151,151,151,0.2)
+}
+.red {
+  color: red
+}
+.green {
+  color: green
 }
 </style>
