@@ -20,16 +20,18 @@
               <span class="num">{{ answersData.total }}</span>
             </div>
             <div class="sub-info">
-              同比
-              <template v-if="answersData.lastYearMonthTotal > 0">
-                
-                <span :class="(answersData.total - answersData.lastYearMonthTotal) > 0 ? 'up-img' : 'down-img'"></span>
-                <span class="sub-info-num" :class="(answersData.total - answersData.lastYearMonthTotal) > 0 ? 'red' : 'green'">
-                  {{ Math.abs(Math.round((( answersData.total - answersData.lastYearMonthTotal ) / answersData.lastYearMonthTotal) * 100)) }}%
-                </span>
-              </template>
-              <span v-else>-</span>
-              <span style="margin-left: 20px">环比</span>
+              <span style="width: 167px; display: inline-block;">
+                同比
+                <template v-if="answersData.lastYearMonthTotal > 0">
+                  
+                  <span :class="(answersData.total - answersData.lastYearMonthTotal) > 0 ? 'up-img' : 'down-img'"></span>
+                  <span class="sub-info-num" :class="(answersData.total - answersData.lastYearMonthTotal) > 0 ? 'red' : 'green'">
+                    {{ Math.abs(Math.round((( answersData.total - answersData.lastYearMonthTotal ) / answersData.lastYearMonthTotal) * 100)) }}%
+                  </span>
+                </template>
+                <span v-else>-</span>
+              </span>
+              环比
               <template v-if="answersData.lastMonthTotal > 0">
                 
                 <span :class="(answersData.total - answersData.lastMonthTotal) > 0 ? 'up-img' : 'down-img'"></span>

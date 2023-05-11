@@ -27,7 +27,7 @@
                 :key="tableIndex"
               >
                 <div class="body-item-first">
-                  <span :class="'rank' + table.index">Top{{ table.index + 1 }}</span>
+                  <span class="rank" :class="'rank' + table.index">Top{{ table.index + 1 }}</span>
                 </div>
                 <div class="body-item">{{ table.modularName }}</div>
                 <div class="body-item-num">
@@ -70,7 +70,7 @@
                 :key="tableIndex"
               >
                 <div class="body-item-first">
-                  <span :class="'rank' + table.index">Top{{ table.index + 1 }}</span>
+                  <span class="rank" :class="'rank' + table.index">Top{{ table.index + 1 }}</span>
                 </div>
                 <div class="body-item">{{ table.modularName }}</div>
                 <div class="body-item-num">

@@ -1,9 +1,9 @@
 <template>
 <div>
   <div class="position-right">
-    <div class="mark">上周<div class="color-block" style="background:#4393FF ;"></div></div>
-    <div class="mark">本周<div class="color-block" style="background:#35D0C0 ;"></div></div>
-    <div class="mark">较上周
+    <div class="mark">上月<div class="color-block" style="background:#4393FF ;"></div></div>
+    <div class="mark">当月<div class="color-block" style="background:#35D0C0 ;"></div></div>
+    <div class="mark">较上月
       <span class="up-down">
         <img src="../../../assets/imgs/arrow(1).svg"/>
         <img src="../../../assets/imgs/arrow(2).svg" style="transform: rotate(180deg);"/>
@@ -104,7 +104,7 @@ export default {
       // }]
       let maxNum = []
       let length = 0
-      debugger
+      
       if(this.complainList.length>10){
         length = 10
       }else{
@@ -216,10 +216,10 @@ a {
   position: relative;
 }
 .module-up-down{
-  font-size: 10px;
+  font-size: 16px;
   text-align: center;
-  font-family:"AlibabaPuHuiTiH" ;
-  font-weight: 100;
+  // font-family:"AlibabaPuHuiTiH" ;
+  font-weight: 600;
 }
 .down{
   color: #77C3F6 ;

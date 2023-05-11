@@ -6,7 +6,7 @@
     <div
     class="table"
     >
-      <div class="table-head">
+      <div class="table-head" style="margin-bottom: 0;">
         <div class="head-item-first">排名</div>
         <div class="head-item">问题类型</div>
         <div class="head-item-num">责任人</div>
@@ -32,7 +32,7 @@
                 :key="tableIndex"
               >
                 <div class="body-item-first">
-                  <span :class="'rank' + table.index">Top{{ table.index + 1 }}</span>
+                  <span class="rank" :class="'rank' + table.index">Top {{ table.index + 1 }}</span>
                 </div>
                 <div class="body-item">{{table.modularName }}</div>
                 <div class="body-item-num">
@@ -263,7 +263,6 @@ import 'swiper/dist/css/swiper.css'
       }
     })
     this.$service.complaintComparison(parmas).then((res) => {
-      debugger
       if (res && res.data) {
         this.comparisonData = res.data
       }
@@ -331,10 +330,10 @@ text-align center
   border-top 1px solid rgba(151,151,151,0.2)
 }
 .red {
-  color: red
+  color: #DF2727
 }
 .green {
-  color: green
+  color: #07C217
 }
 
 .total-wrap {
@@ -359,5 +358,12 @@ text-align center
     bottom: 0;
     color: #80828b;
   }
+}
+.table-body--item {
+  height 85px
+  line-height 85px
+}
+.rank0, .rank1, .rank2 {
+  font-size: 22px;
 }
 </style>
