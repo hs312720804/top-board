@@ -20,8 +20,8 @@
       <!-- <slider ref="slider2" :options="options">
 
         <slideritem > -->
-          <swiper :options="options" ref="mySwiper" v-if="componentList.length > 0">
-            <swiper-slide v-for="(val,index) in componentList" :key="index">
+          <swiper :options="options" ref="mySwiper" v-if="table2ComponentList.length > 0">
+            <swiper-slide v-for="(val,index) in table2ComponentList" :key="index">
             
       <!-- <slider ref="mySwiper" :options="options" v-if="componentList.length > 0">
 
@@ -142,7 +142,6 @@
 // import Table3 from './table3.vue'
 import barChart from './barChart.vue'
 // import CChart from '@/components/charts/Index.vue'
-// import Swiper from 'swiper'
 import moment from 'moment'
 // import { slider, slideritem } from 'vue-concise-slider'
 	// 局部引入 vue-awesome-swiper 及其样式
@@ -159,6 +158,7 @@ import 'swiper/dist/css/swiper.css'
 // import { Swiper, SwiperSlide } from 'swiper/vue';
 
  export default {
+  inject: ['_this'],
    components: {
     // Table4,
     // Table3,
@@ -186,11 +186,11 @@ import 'swiper/dist/css/swiper.css'
      return {
       lastMonth: '',
       beforeLastMonth: '',
-      tableData: [],
-      tableData1: [],
-      tableData2: [],
-      componentList: [], // 总的轮播数据
-      comparisonData: [], // 客诉趋势
+      // tableData: [],
+      // tableData1: [],
+      // tableData2: [],
+      // componentList: [], // 总的轮播数据
+      // comparisonData: [], // 客诉趋势
       options: {
         // direction: 'vertical',
         // 改变swiper样式时，自动初始化swiper
@@ -213,18 +213,27 @@ import 'swiper/dist/css/swiper.css'
    computed: {
       swiper() {
         return this.$refs.mySwiper.swiper
+      },
+      tableData () {
+        return this._this.tableData
+      },
+      tableData1 () {
+        return this._this.tableData1
+      },
+      tableData2 () {
+        return this._this.tableData2
+      },
+      table2ComponentList () {
+        return this._this.table2ComponentList
+      },
+      comparisonData () {
+        return this._this.comparisonData
       }
     },
     watch: {
       currentPage: {
         handler() {
           this.swiper.slideTo(1, 0, false)
-          // console.log('this.$refs.mySwiper------->', this.$refs.mySwiper)
-          // // this.$refs.mySwiper.slide(1)
-          // this.$nextTick(() => {
-          //   this.$refs.mySwiper.$emit('slideTo', 0)
-          // })
-          // this.$refs.mySwiper.$emit('autoplayStart',1000)
         },
         immediate: true
       }
@@ -232,50 +241,42 @@ import 'swiper/dist/css/swiper.css'
    created() {
     this.lastMonth = moment(new Date()).subtract(1,'months').startOf('month').format('M')
     this.beforeLastMonth  = moment(new Date()).subtract(2,'months').startOf('month').format('M')
-    const today = moment(new Date()).format('YYYY-MM-DD')
+    // const today = moment(new Date()).format('YYYY-MM-DD')
 
-    const parmas = {
-      timeCode: today
-    }
-    this.$service.selMonthRanking(parmas).then((res) => {
-      if (res && res.data) {
-        this.tableData = res.data.map((item, i) => {
-          let info = {}
-          if (item.userInfo) {
-            info = JSON.parse(item.userInfo)[0]
-          }
-          console.log('info-->', info)
-          return {
-            index: i,
-            ...item,
-            avatar: info && info.avatar ? info.avatar : '',
-            name: info && info.name ? info.name : '',
-          }
-        })
-
-        this.tableData1 = this.tableData.slice(0, 5)
-        this.tableData2 = this.tableData.slice(5, 10)
-        this.componentList = [
-         this.tableData1,
-         this.tableData2
-        ]
-        console.log('tableData-------->', this.tableData)
-      }
-    })
-    this.$service.complaintComparison(parmas).then((res) => {
-      if (res && res.data) {
-        this.comparisonData = res.data
-      }
-    })
-    // for (let i = 0; i < 10; i ++) {
-    //   this.tableData.push({
-    //     index: i,
-    //     date: '2016-05-02',
-    //     name: `王小虎${i}`,
-    //     address: '10%',
-    //     thumbnail: 'https://a1.cdn.91360.com/cms/bs3/upload/section/31c9f4a94769e924b7ccd764c075b29a_t.png',
-    //   })
+    // const parmas = {
+    //   timeCode: today
     // }
+    // this.$service.selMonthRanking(parmas).then((res) => {
+    //   if (res && res.data) {
+    //     this.tableData = res.data.map((item, i) => {
+    //       let info = {}
+    //       if (item.userInfo) {
+    //         info = JSON.parse(item.userInfo)[0]
+    //       }
+    //       console.log('info-->', info)
+    //       return {
+    //         index: i,
+    //         ...item,
+    //         avatar: info && info.avatar ? info.avatar : '',
+    //         name: info && info.name ? info.name : '',
+    //       }
+    //     })
+
+    //     this.tableData1 = this.tableData.slice(0, 5)
+    //     this.tableData2 = this.tableData.slice(5, 10)
+    //     this.componentList = [
+    //      this.tableData1,
+    //      this.tableData2
+    //     ]
+    //     console.log('tableData-------->', this.tableData)
+    //   }
+    // })
+    // this.$service.complaintComparison(parmas).then((res) => {
+    //   if (res && res.data) {
+    //     this.comparisonData = res.data
+    //   }
+    // })
+   
     
    },
    mounted () {

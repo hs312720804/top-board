@@ -112,12 +112,6 @@ export default {
 
     // this.currentMonth = moment().format('YYYY-MM');  //获取当年月  2022-09
     // console.log(' currentMonth-------->', this.currentMonth)
-    
-    // this.$service.complaintComparison(parmas).then((res) => {
-    //   this.barData = res.data || {}
-    // })
-    
-  
   },
   methods: {
     

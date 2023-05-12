@@ -23,7 +23,7 @@
             <swiper-slide v-for="(val,index) in componentList" :key="index"> -->
               <div
                 class="table-body--item"
-                v-for="(table, tableIndex) in componentList"
+                v-for="(table, tableIndex) in table1ComponentList"
                 :key="tableIndex"
               >
                 <div class="body-item-first">
@@ -105,7 +105,7 @@
 </template>
 
 <script>
-import moment from 'moment'
+// import moment from 'moment'
 // import {
 //   swiper,
 //   swiperSlide
@@ -113,6 +113,7 @@ import moment from 'moment'
 
 // import 'swiper/dist/css/swiper.css'
 export default {
+  inject: ['_this'],
    components: {
     // swiper,
 		// swiperSlide
@@ -121,31 +122,9 @@ export default {
      return {
       // tableData1: [],
       // tableData2: [],
-      componentList: [], // 总的轮播数据
-      blackComponentList: [], // 总的轮播数据
-      // tableData: [
-      //   {
-      //   date: '2016-05-02',
-      //   name: '王小虎',
-      //   address: '10%',
-      //   thumbnail: 'https://a1.cdn.91360.com/cms/bs3/upload/section/31c9f4a94769e924b7ccd764c075b29a_t.png',
-      // }, {
-      //   date: '2016-05-04',
-      //   name: '王小虎',
-      //   address: '10%',
-      //   thumbnail: 'https://a1.cdn.91360.com/cms/bs3/upload/section/31c9f4a94769e924b7ccd764c075b29a_t.png',
-      // }, {
-      //   date: '2016-05-01',
-      //   name: '王小虎',
-      //   address: '10%',
-      //   thumbnail: 'https://a1.cdn.91360.com/cms/bs3/upload/section/31c9f4a94769e924b7ccd764c075b29a_t.png',
-      // }, {
-      //   date: '2016-05-03',
-      //   name: '王小虎',
-      //   address: '10%',
-      //   thumbnail: 'https://a1.cdn.91360.com/cms/bs3/upload/section/31c9f4a94769e924b7ccd764c075b29a_t.png',
-      // }
-      // ],
+      // componentList: [], // 总的轮播数据
+      // blackComponentList: [], // 总的轮播数据
+      
       options: {
         // direction: 'vertical',
         // 改变swiper样式时，自动初始化swiper
@@ -158,79 +137,80 @@ export default {
           disableOnInteraction: false
         }
       },
-      proccessed: '-',
-      unProccessed: '-'
+      // proccessed: '-',
+      // unProccessed: '-'
      }
    },
-   created() {
-    const lastMonthTime = moment(new Date()).subtract(1,'months').startOf('month').format('yyyy-MM-DD HH:mm:ss')
-
-    const parmas = {
-      date: lastMonthTime
+   computed: {
+    table1ComponentList () {
+      return this._this.table1ComponentList
+    },
+    blackComponentList () {
+      return this._this.blackComponentList
+    },
+    proccessed () {
+      return this._this.proccessed
+    },
+    unProccessed () {
+      return this._this.unProccessed
     }
-    this.$service.redRank(parmas).then((res) => {
-      if (res && res.data && res.data.list) {
-        this.proccessed = res.data.proccessed
-        this.unProccessed = res.data.unProccessed
-        const tableData = res.data.list.map((item, i) => {
-          let info = {}
-          if (item.userInfo) {
-            info = item.userInfo[0]
-          }
-          console.log('info-->', info)
-          return {
-            index: i,
-            ...item,
-            avatar: info && info.avatar ? info.avatar : '',
-            name: info && info.name ? info.name : '',
-          }
-        })
+  },
+   created() {
+    // const lastMonthTime = moment(new Date()).subtract(1,'months').startOf('month').format('yyyy-MM-DD HH:mm:ss')
 
-        const tableData1 = tableData.slice(0, 5)
-        // const tableData2 = tableData.slice(5, 10)
+    // const parmas = {
+    //   date: lastMonthTime
+    // }
+    // this.$service.redRank(parmas).then((res) => {
+    //   if (res && res.data && res.data.list) {
+    //     this.proccessed = res.data.proccessed
+    //     this.unProccessed = res.data.unProccessed
+    //     const tableData = res.data.list.map((item, i) => {
+    //       let info = {}
+    //       if (item.userInfo) {
+    //         info = item.userInfo[0]
+    //       }
+    //       console.log('info-->', info)
+    //       return {
+    //         index: i,
+    //         ...item,
+    //         avatar: info && info.avatar ? info.avatar : '',
+    //         name: info && info.name ? info.name : '',
+    //       }
+    //     })
 
-        // this.componentList = [
-        //  tableData1,
-        //  tableData2
-        // ]
-        this.componentList = tableData1
+    //     const tableData1 = tableData.slice(0, 5)
+    //     this.componentList = tableData1
         
-      }
-    })
-    this.$service.blackRank(parmas).then((res) => {
-      if (res && res.data && res.data.list) {
-        const tableData = res.data.list.map((item, i) => {
-          let info = {}
-          if (item.userInfo) {
-            info = item.userInfo[0]
-          }
-          console.log('info-->', info)
-          return {
-            index: i,
-            ...item,
-            avatar: info && info.avatar ? info.avatar : '',
-            name: info && info.name ? info.name : '',
-          }
-        })
+    //   }
+    // })
+    // this.$service.blackRank(parmas).then((res) => {
+    //   if (res && res.data && res.data.list) {
+    //     const tableData = res.data.list.map((item, i) => {
+    //       let info = {}
+    //       if (item.userInfo) {
+    //         info = item.userInfo[0]
+    //       }
+    //       console.log('info-->', info)
+    //       return {
+    //         index: i,
+    //         ...item,
+    //         avatar: info && info.avatar ? info.avatar : '',
+    //         name: info && info.name ? info.name : '',
+    //       }
+    //     })
 
-        const tableData1 = tableData.slice(0, 5)
-        // const tableData2 = tableData.slice(5, 10)
-
-        // this.blackComponentList = [
-        //  tableData1,
-        //  tableData2
-        // ]
-        this.blackComponentList = tableData1
+    //     const tableData1 = tableData.slice(0, 5)
+      
+    //     this.blackComponentList = tableData1
          
-      }
-    })
+    //   }
+    // })
   
     
-   },
-   methods: {
-
-   }
- }
+  },
+  
+}
 </script>
 
 <style lang='stylus' scoped>

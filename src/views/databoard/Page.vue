@@ -225,6 +225,7 @@ import setInterval from './setInterval.js'
 import moment from 'moment'
 export default {
   mixins: [setInterval],
+  inject: ['_this'],
   components: {
     // CChart,
     // ScreenFull
@@ -238,11 +239,7 @@ export default {
   data () {
     return {
       currentMonth: '',
-      array1: [
-        {
-          
-        }
-      ],
+      
       databoardData: [],
       passCallParams: {
         endDate: "",
@@ -260,57 +257,54 @@ export default {
         value: 'year',
         label: '年度'
       }],
-      boardBugData: {},
-      boardNeedData: {},
-      answersData: []
-      // scalseNum: 1,
-      // pagesHeight: 1080,
+      // boardBugData: this._this.boardBugData,
+      // boardNeedData: {},
+      // answersData: []
+     
     }
   },
-  computed: {},
+  computed: {
+    boardBugData () {
+      return this._this.boardBugData
+    },
+    boardNeedData () {
+      return this._this.boardNeedData
+    },
+    answersData () {
+      return this._this.answersData
+    }
+  },
   created() {
     this.currentMonth = moment(new Date()).subtract(1,'months').startOf('month').format('YYYY-MM')
 
     // this.currentMonth = moment().format('YYYY-MM');  //获取当年月  2022-09
     // console.log(' currentMonth-------->', this.currentMonth)
-    const lastMonthTime = moment(new Date()).subtract(1,'months').startOf('month').format('yyyy-MM-DD HH:mm:ss')
+    // const lastMonthTime = moment(new Date()).subtract(1,'months').startOf('month').format('yyyy-MM-DD HH:mm:ss')
 
-    const parmas = {
-      date: lastMonthTime
-    }
-    this.$service.boardBug(parmas).then((res) => {
-      this.boardBugData = res.data || {}
-    })
-    this.$service.boardNeed(parmas).then((res) => {
-      this.boardNeedData = res.data || {}
-    })
-
-
-    const today = moment(new Date()).format('YYYY-MM-DD')
-
-    const parmas2 = {
-      timeCode: today
-    }
-    // 咨询解答
-    this.$service.selConsultationAnswers(parmas2).then((res) => {
-      if (res && res.data) {
-        this.answersData = res.data
-      }
-    })
-
-  },
-  methods: {
-    
-    // resize_window (width) {
-    //   const scalseNum = Number((width) / 1920)
-    //   this.scalseNum = scalseNum
-    //   this.pagesHeight = 1080 * scalseNum
+    // const parmas = {
+    //   date: lastMonthTime
     // }
-    
+    // this.$service.boardBug(parmas).then((res) => {
+    //   this.boardBugData = res.data || {}
+    // })
+    // this.$service.boardNeed(parmas).then((res) => {
+    //   this.boardNeedData = res.data || {}
+    // })
+
+
+    // const today = moment(new Date()).format('YYYY-MM-DD')
+
+    // const parmas2 = {
+    //   timeCode: today
+    // }
+    // // 咨询解答
+    // this.$service.selConsultationAnswers(parmas2).then((res) => {
+    //   if (res && res.data) {
+    //     this.answersData = res.data
+    //   }
+    // })
+
   },
-  mounted () {
-  
-  }
 }
 </script>
 

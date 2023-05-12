@@ -33,12 +33,17 @@
           '-ms-transform':`scale(${scalseNum})`
         }"
       >
-      <slider ref="slider" :options="options" @slide='slide'>
-
+      <slider ref="slider" :options="options" @slide="slide">
         <slideritem v-for="(val,index) in componentList" :key="index">
           <component :is="val" :currentPage="currentPage"></component>
         </slideritem>
       </slider>
+      <!-- <slideritem><page :currentPage="currentPage"></page></slideritem>
+      <slideritem><page2 :currentPage="currentPage"></page2></slideritem> -->
+
+      <!-- <div v-for="(val) in componentList" :key="val">
+        <component :is="val" :currentPage="currentPage"></component>
+      </div> -->
 </div>
 </div>
 </el-scrollbar>
@@ -46,14 +51,13 @@
 
 <script>
 import elementResizeDetectorMaker from 'element-resize-detector'
-
-// import Swiper from 'swiper'
 import page from './Page.vue'
 import page2 from './Page2.vue'
-
 import { slider, slideritem } from 'vue-concise-slider'
+import myMinix from './mixin';
 
 export default {
+  mixins: [myMinix], // todo.vue 中声明 minix 进行混合
   components: {
     page,
     page2,
@@ -87,7 +91,7 @@ export default {
       })
     })
 
-    this.bannerPoint()
+    // this.bannerPoint()
   },
   methods: {
     // 监听事件
