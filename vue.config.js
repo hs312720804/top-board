@@ -10,7 +10,7 @@ const BACKEND = process.env.BACKEND || '172.20.150.233:8088' // 对接环境
 
 const PORT = process.env.PORT || '8989'
 const HOST = process.env.HOST || '127.0.0.1'
-const baseUrl = ENV === 'production' ? '/topBoard/' : '/'
+const baseUrl = ENV === 'production' ? `/${process.env.VUE_APP_Top_Path}/` : '/'
 
 module.exports = defineConfig({
   // productionSourceMap: !isPro,

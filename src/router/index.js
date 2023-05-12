@@ -15,7 +15,7 @@ const routes = [
 ]
 
 const router = new VueRouter({
-  base: '/topBoard/',
+  base: `/${process.env.VUE_APP_Top_Path}/`,
   routes,
   mode: 'history'
 })
