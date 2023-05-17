@@ -26,6 +26,8 @@ export default {
       tableData2: [],
       table2ComponentList: [], // 总的轮播数据
       comparisonData: [], // 客诉趋势
+      collapseData: []  //异常崩溃
+
     }
   },
   created() {
@@ -151,6 +153,12 @@ export default {
           }
         })
       })
-    }
+
+      // 异常崩溃
+      this.$service.collapse().then((res) => {
+        this.collapseData = res.data
+      })
+    },
+    
   }
 }

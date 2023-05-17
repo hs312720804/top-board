@@ -56,3 +56,11 @@ export function blackRank (params) {
     params
   })
 }
+// 异常崩溃
+export function collapse (params) {
+  return this.fetch({
+    method: 'get',
+    url: 'nbpAdmin/problemRanking/collapse',
+    params
+  })
+}

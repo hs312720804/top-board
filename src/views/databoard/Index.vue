@@ -33,11 +33,14 @@
           '-ms-transform':`scale(${scalseNum})`
         }"
       >
-      <slider ref="slider" :options="options" @slide="slide">
+      <slider v-if="autoplay === true" ref="slider" :options="options" @slide="slide">
         <slideritem v-for="(val,index) in componentList" :key="index">
           <component :is="val" :currentPage="currentPage"></component>
         </slideritem>
       </slider>
+      <div v-else v-for="(val,index) in componentList" :key="index">
+        <component :is="val" :currentPage="currentPage"></component>
+      </div>
       <!-- <slideritem><page :currentPage="currentPage"></page></slideritem>
       <slideritem><page2 :currentPage="currentPage"></page2></slideritem> -->
 
@@ -79,7 +82,17 @@ export default {
         autoplay: '15000',
         loop: true
       },
-      currentPage: 0
+      currentPage: 0,
+      autoplay: true
+    }
+  },
+  watch: {
+    '$route': {
+      handler () {
+        console.log('this.$route--->', this.$route)
+        this.autoplay = this.$route.query.autoplay || true
+      }, 
+      immediate: true
     }
   },
   mounted() {

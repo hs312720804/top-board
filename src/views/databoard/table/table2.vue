@@ -121,12 +121,10 @@
       <div class="title">
         异常崩溃
 
-        <div class="img-empty"></div>
-
-        <!-- <el-empty description="暂无数据" :image-size="200"></el-empty> -->
+        <!-- <div class="img-empty"></div> -->
         
       </div>
-      <!-- <Table4></table4> -->
+      <Table4></Table4>
       
     </div>
 
@@ -138,7 +136,7 @@
 </template>
 
 <script>
-// import Table4 from './table4.vue'
+import Table4 from './table4.vue'
 // import Table3 from './table3.vue'
 import barChart from './barChart.vue'
 // import CChart from '@/components/charts/Index.vue'
@@ -160,7 +158,7 @@ import 'swiper/dist/css/swiper.css'
  export default {
   inject: ['_this'],
    components: {
-    // Table4,
+    Table4,
     // Table3,
     barChart,
     swiper,
