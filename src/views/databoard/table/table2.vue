@@ -37,7 +37,10 @@
                 <div class="body-item">{{table.modularName }}</div>
                 <div class="body-item-num">
                   <img class="img-style" :src="table.avatar" min-width="30" height="30"/>
-                  {{ table.name || '-' }}
+                  <!-- {{ table.name || '-' }} -->
+                  <span v-if="!table.name"> - </span>
+                  <span v-else-if="table.name.length === 2"> {{ table.name }}&nbsp;&nbsp;&nbsp;</span>
+                  <span v-else> {{ table.name }}</span>
                 </div>
                 <div class="body-item-num">
                   {{ table.monthRanking }}
