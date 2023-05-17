@@ -41,10 +41,10 @@
                 </div>
                 <div class="body-item-num">
                   {{ table.monthRanking }}
-                  <span :class="(table.monthRanking - table.beforeMonthRanking) > 0 ? 'red' : 'green'">
+                  <span :class="(table.beforeMonthRanking - table.monthRanking) > 0 ? 'red' : 'green'">
                     （
-                    <span>{{ getOp(table.monthRanking, table.beforeMonthRanking) }}</span>
-                    {{ table.monthRanking - table.beforeMonthRanking }}
+                    <span>{{ getOp(table.beforeMonthRanking, table.monthRanking) }}</span>
+                    {{ table.beforeMonthRanking - table.monthRanking }}
                     ）
                   </span>
                 </div>
