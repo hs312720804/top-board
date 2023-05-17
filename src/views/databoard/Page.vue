@@ -73,7 +73,7 @@
               <span class="num" v-if="answersData.evaluate && answersData.evaluate > 0">
                 {{ Math.round(answersData.satisfaction /  answersData.evaluate * 100) }}%
               </span>
-              <span class="num" v-else> - </span>
+              <span class="num" v-else> / </span>
 
             </div>
           </div>
@@ -145,7 +145,7 @@
               <span class="num" v-if="boardBugData.evaluate && boardBugData.evaluate > 0">
                 {{ Math.round(boardBugData.satisfaction /  boardBugData.evaluate * 100) }}%
               </span>
-              <span class="num" v-else> - </span>
+              <span class="num" v-else> / </span>
 
             </div>
           </div>
@@ -214,7 +214,7 @@
               <span class="num" v-if="boardNeedData.evaluate && boardNeedData.evaluate > 0">
                 {{ Math.round(boardNeedData.satisfaction /  boardNeedData.evaluate * 100) }}%
               </span>
-              <span class="num" v-else> - </span>
+              <span class="num" v-else> / </span>
 
             </div>
           </div>
