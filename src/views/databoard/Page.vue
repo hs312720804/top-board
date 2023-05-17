@@ -70,7 +70,7 @@
               
               <i class="icon el-icon-star-off"></i>
               <span class="info">满意度</span>
-              <span class="num">{{ Math.round(answersData.satisfaction /  answersData.total * 100) }}%</span>
+              <span class="num">{{ Math.round(answersData.satisfaction /  answersData.evaluate * 100) }}%</span>
             </div>
           </div>
         </div>
@@ -137,7 +137,8 @@
               
               <i class="icon el-icon-star-off"></i>
               <span class="info">满意度</span>
-              <span class="num">{{ boardBugData.satisfactionRatio === undefined ? '/' : (Math.round(boardBugData.satisfactionRatio * 100) + '%')  }}</span>
+              <!-- <span class="num">{{ boardBugData.satisfactionRatio === undefined ? '/' : (Math.round(boardBugData.satisfactionRatio * 100) + '%')  }}</span> -->
+              <span class="num">{{ Math.round(boardBugData.satisfaction /  boardBugData.evaluate * 100) }}%</span>
             </div>
           </div>
         </div>
@@ -201,7 +202,8 @@
               
               <i class="icon el-icon-star-off"></i>
               <span class="info">满意度</span>
-              <span class="num">{{ boardNeedData.satisfactionRatio === undefined ? '/' : (Math.round(boardNeedData.satisfactionRatio * 100) + '%') }}</span>
+              <!-- <span class="num">{{ boardNeedData.satisfactionRatio === undefined ? '/' : (Math.round(boardNeedData.satisfactionRatio * 100) + '%') }}</span> -->
+              <span class="num">{{ Math.round(boardNeedData.satisfaction /  boardNeedData.evaluate * 100) }}%</span>
             </div>
           </div>
         </div>
