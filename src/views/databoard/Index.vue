@@ -17,38 +17,43 @@
     </div> -->
   <!-- </div> -->
 
-  <div
+  <!-- 【电视】 模式：自动轮播 -->
+  <div  v-if="autoplay === true" :style="{'height': `${pagesHeight}px`}">
+    <div class="databoard"
       :style="{
-        'height': `${pagesHeight}px`
+        'transformOrigin':'left top',
+        'transform':`scale(${scalseNum})`,
+        '-webkit-transform':`scale(${scalseNum})`,
+        '-moz-transform':`scale(${scalseNum})`,
+        '-o-transform':`scale(${scalseNum})`,
+        '-ms-transform':`scale(${scalseNum})`
       }"
     >
-
-      <div class="databoard"
-        :style="{
-          'transformOrigin':'left top',
-          'transform':`scale(${scalseNum})`,
-          '-webkit-transform':`scale(${scalseNum})`,
-          '-moz-transform':`scale(${scalseNum})`,
-          '-o-transform':`scale(${scalseNum})`,
-          '-ms-transform':`scale(${scalseNum})`
-        }"
-      >
-      <slider v-if="autoplay === true" ref="slider" :options="options" @slide="slide">
+      <slider ref="slider" :options="options" @slide="slide">
         <slideritem v-for="(val,index) in componentList" :key="index">
           <component :is="val" :currentPage="currentPage"></component>
         </slideritem>
       </slider>
-      <div v-else v-for="(val,index) in componentList" :key="index">
+    </div>
+  </div>
+  <!-- 【PC】 模式：不自动轮播 -->
+  <div v-else :style="{'height': `${pagesHeight}px`}">
+    <div class="databoard"
+      :style="{
+        'transformOrigin':'left top',
+        'transform':`scale(${scalseNum})`,
+        '-webkit-transform':`scale(${scalseNum})`,
+        '-moz-transform':`scale(${scalseNum})`,
+        '-o-transform':`scale(${scalseNum})`,
+        '-ms-transform':`scale(${scalseNum})`
+      }"
+    >
+    
+      <div v-for="(val,index) in componentList" :key="index">
         <component :is="val" :currentPage="currentPage"></component>
       </div>
-      <!-- <slideritem><page :currentPage="currentPage"></page></slideritem>
-      <slideritem><page2 :currentPage="currentPage"></page2></slideritem> -->
-
-      <!-- <div v-for="(val) in componentList" :key="val">
-        <component :is="val" :currentPage="currentPage"></component>
-      </div> -->
-</div>
-</div>
+    </div>
+  </div>
 </el-scrollbar>
 </template>
 
