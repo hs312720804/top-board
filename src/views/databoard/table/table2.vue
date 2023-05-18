@@ -141,7 +141,7 @@
 <script>
 import Table4 from './table4.vue'
 // import Table3 from './table3.vue'
-import barChart from './barChart.vue'
+import barChart from '@/components/barChart.vue'
 // import CChart from '@/components/charts/Index.vue'
 import moment from 'moment'
 // import { slider, slideritem } from 'vue-concise-slider'

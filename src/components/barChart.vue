@@ -5,8 +5,8 @@
     <div class="mark">当月<div class="color-block" style="background:#35D0C0 ;"></div></div>
     <div class="mark">较上月
       <span class="up-down">
-        <img src="../../../assets/imgs/arrow(1).svg"/>
-        <img src="../../../assets/imgs/arrow(2).svg" style="transform: rotate(180deg);"/>
+        <img src="~@/assets/imgs/arrow(1).svg"/>
+        <img src="~@/assets/imgs/arrow(2).svg" style="transform: rotate(180deg);"/>
       </span>
     </div>
   </div>
@@ -36,8 +36,8 @@
       <div class="module" v-for="(item,index) in complainList.slice(0,10)" :key="index">
         <div class="module-up-down" v-if="getPercentageChange(item.beforeMonthProblemTotal,item.monthProblemTotal) !=0">
           <span :class="item.beforeMonthProblemTotal>item.monthProblemTotal?'down':'up'">{{ getPercentageChange(item.beforeMonthProblemTotal,item.monthProblemTotal) }}%</span>
-          <img v-if="item.beforeMonthProblemTotal>item.monthProblemTotal" src="../../../assets/imgs/arrow(1).svg"/>
-          <img v-if="item.beforeMonthProblemTotal<item.monthProblemTotal" src="../../../assets/imgs/arrow(2).svg" style="transform: rotate(180deg);"/>
+          <img v-if="item.beforeMonthProblemTotal>item.monthProblemTotal" src="~@/assets/imgs/arrow(1).svg"/>
+          <img v-if="item.beforeMonthProblemTotal<item.monthProblemTotal" src="~@/assets/imgs/arrow(2).svg" style="transform: rotate(180deg);"/>
         </div>
         <div class="rec_item_wrapper" :style="{height:item.beforeMonthProblemTotal*(280/complainMaxNum)>item.monthProblemTotal*(280/complainMaxNum)?item.beforeMonthProblemTotal*(280/complainMaxNum)+'px':item.monthProblemTotal*(280/complainMaxNum)+'px'}">
           <div class="beforeMonthProblemTotal bar" :class="item.beforeMonthProblemTotal*(280/complainMaxNum) > 2 ? 'radius':''" :style="{ height: item.beforeMonthProblemTotal*(280/complainMaxNum)+'px' }"></div>
@@ -214,6 +214,7 @@ a {
   // width: 600px;
   // margin: 0 auto;
   position: relative;
+  height: 342px;
 }
 .module-up-down{
   font-size: 16px;
@@ -262,7 +263,7 @@ a {
   justify-content: space-around;
   flex-direction: row;
   // align-items: end;
-  bottom: 26px;
+  bottom: 20px;
   vertical-align: bottom;
   position: absolute;
   width: 100%;

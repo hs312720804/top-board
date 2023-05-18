@@ -37,23 +37,23 @@
     </div>
   </div>
   <!-- 【PC】 模式：不自动轮播 -->
-  <div v-else :style="{'height': `${pagesHeight}px`}">
-    <div class="databoard"
-      :style="{
-        'transformOrigin':'left top',
-        'transform':`scale(${scalseNum})`,
-        '-webkit-transform':`scale(${scalseNum})`,
-        '-moz-transform':`scale(${scalseNum})`,
-        '-o-transform':`scale(${scalseNum})`,
-        '-ms-transform':`scale(${scalseNum})`
-      }"
-    >
-    
-      <div v-for="(val,index) in componentList" :key="index">
+  <template v-else>
+    <div :style="{'height': `${pagesHeight}px`}" v-for="(val,index) in componentList" :key="index">
+      <div class="databoard"
+        :style="{
+          'transformOrigin':'left top',
+          'transform':`scale(${scalseNum})`,
+          '-webkit-transform':`scale(${scalseNum})`,
+          '-moz-transform':`scale(${scalseNum})`,
+          '-o-transform':`scale(${scalseNum})`,
+          '-ms-transform':`scale(${scalseNum})`
+        }"
+      >
+      
         <component :is="val" :currentPage="currentPage"></component>
       </div>
     </div>
-  </div>
+  </template>
 </el-scrollbar>
 </template>
 
