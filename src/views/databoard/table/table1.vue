@@ -82,7 +82,7 @@
                   <span v-else-if="table.name.length === 2"> {{ table.name }}&nbsp;&nbsp;&nbsp;</span>
                   <span v-else> {{ table.name }}</span>
                 </div>
-                <div class="body-item-num">{{ table.processed }}</div>
+                <div class="body-item-num">{{ table.unProcessed }}</div>
                 <div class="body-item-num">{{ Math.round((Number(table.processedRatio) * 100)) }}%</div>
               </div>
             <!-- </swiper-slide>
