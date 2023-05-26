@@ -26,8 +26,8 @@ export default {
       tableData2: [],
       table2ComponentList: [], // 总的轮播数据
       comparisonData: [], // 客诉趋势
-      collapseData: []  //异常崩溃
-
+      collapseData: [],  //异常崩溃
+      defaultIcon: require('@/assets/imgs/defaultIcon.png')
     }
   },
   created() {
@@ -83,7 +83,7 @@ export default {
             return {
               index: i,
               ...item,
-              avatar: info && info.avatar ? info.avatar : '',
+              avatar: info && info.avatar ? info.avatar : this.defaultIcon,
               name: info && info.name ? info.name : '',
             }
           })
@@ -104,7 +104,7 @@ export default {
             return {
               index: i,
               ...item,
-              avatar: info && info.avatar ? info.avatar : '',
+              avatar: info && info.avatar ? info.avatar : this.defaultIcon,
               name: info && info.name ? info.name : '',
             }
           })
@@ -133,7 +133,7 @@ export default {
             return {
               index: i,
               ...item,
-              avatar: info && info.avatar ? info.avatar : '',
+              avatar: info && info.avatar ? info.avatar : this.defaultIcon,
               name: info && info.name ? info.name : '',
             }
           })
