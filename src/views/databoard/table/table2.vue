@@ -38,7 +38,7 @@
                 <div class="body-item-num">
                   <img class="img-style" :src="table.avatar" min-width="30" height="30"/>
                   <!-- {{ table.name || '-' }} -->
-                  <span v-if="!table.name"></span>
+                  <span v-if="!table.name"> 未分配</span>
                   <span v-else-if="table.name.length === 2"> {{ table.name }}&nbsp;&nbsp;&nbsp;</span>
                   <span v-else> {{ table.name }}</span>
                 </div>
