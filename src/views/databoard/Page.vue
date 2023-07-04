@@ -14,12 +14,15 @@
           咨询解答
         </div>
         <div class="grid-columns--content">
-          <div class="grid-columns--content-box box1" style="padding: 10px 0 0 24px;">
+          <!-- <div class="grid-columns--content-box box1" style="padding: 10px 0 0 24px;"> -->
+          <div class="grid-columns--content-box box1">
             <div>
               <span class="info" style="margin-left: 0;">累计</span>
-              <span class="num">{{ answersData.total }}</span>
+              <span class="num">
+                {{ answersData.total }}
+              </span>
             </div>
-            <div class="sub-info">
+            <!-- <div class="sub-info">
               <span style="width: 167px; display: inline-block;">
                 同比
                 <template v-if="answersData.lastYearMonthTotal > 0">
@@ -40,8 +43,7 @@
                 </span>
               </template>
               <span v-else>-</span>
-            
-            </div>
+            </div> -->
 
           </div>
           <div class="grid-columns--content-box box2" >
